@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import AuthModal from '../components/authModal';
 import { Container, MainContainer } from '../components/styled/div';
 import { MainTitle, SecondaryTitle } from '../components/styled/title';
@@ -27,7 +27,7 @@ const Auth = () => {
           <Container flex fd={'column'}>
             <MainTitle
               ta={'center'}
-              color={'var(--primary-color)'}
+              c={'var(--primary-color)'}
               fs={'6.5rem'}
               fw={400}
             >
@@ -35,7 +35,7 @@ const Auth = () => {
             </MainTitle>
             <SecondaryTitle
               ta={'center'}
-              color={'var(--white)'}
+              c={'var(--white)'}
               fs={'2.5rem'}
               fw={400}
             >
@@ -47,7 +47,7 @@ const Auth = () => {
             <AuthButton login onClick={handleLoginOnClick}>
               Login
             </AuthButton>
-            <AuthButton signUp onClick={handleRegisterOnClick}>
+            <AuthButton signup onClick={handleRegisterOnClick}>
               Sign up
             </AuthButton>
           </Container>

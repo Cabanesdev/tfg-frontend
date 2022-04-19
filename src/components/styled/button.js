@@ -15,8 +15,8 @@ const AuthButton = styled.button`
       background-color: var(--primary-color);
     `}
 
-  ${({ signUp }) =>
-    signUp &&
+  ${({ signup }) =>
+    signup &&
     css`
       background-color: var(--grey);
       color: var(--white);

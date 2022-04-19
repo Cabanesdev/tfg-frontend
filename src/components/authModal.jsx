@@ -1,6 +1,6 @@
-import React from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
 import { AuthModalContainer, MainContainer, Container } from './styled/div';
+import Login from './login';
 
 const AuthModal = ({ showLoginComponent, showModal }) => {
   return (
@@ -14,8 +14,7 @@ const AuthModal = ({ showLoginComponent, showModal }) => {
           <AiOutlineClose size={20} style={{ color: 'white' }} />
         </div>
         <Container flex fd={'column'} ai={'center'}>
-          <h1>Login</h1>
-          {showLoginComponent ? 'login' : 'register'}
+          {showLoginComponent ? <Login /> : 'register'}
         </Container>
       </AuthModalContainer>
     </MainContainer>
