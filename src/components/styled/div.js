@@ -47,4 +47,31 @@ const AuthModalContainer = styled(Container)`
   border-radius: 15px;
 `;
 
-export { MainContainer, Container, AuthModalContainer };
+const AuthFormContainer = styled(Container)`
+  & > * {
+    margin: 30px;
+  }
+
+  & > p {
+    color:white;
+  }
+
+  & > p > span {
+    color:var(--primary-color);
+  }
+
+
+  & > p > span:hover {
+    cursor:pointer;
+    text-decoration:underline;
+  }
+`
+
+const AuthInputContainer = styled(Container)`
+  max-width: 380px;
+  border-radius:10px;
+  padding: 5px;
+  background-color: var(--secondary-color);
+`
+
+export { MainContainer, Container, AuthModalContainer, AuthFormContainer, AuthInputContainer };

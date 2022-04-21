@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 const AuthButton = styled.button`
   width: 250px;
   height: 50px;
-  border: none;
+  border:none;
   border-radius: 15px;
   font-size: 1.125rem;
   cursor: pointer;
@@ -23,4 +23,16 @@ const AuthButton = styled.button`
     `}
 `;
 
-export { AuthButton };
+const AuthFormButton = styled.button`
+  width: 85%;
+  height: 60px;
+  max-width: 380px;
+  border:none;
+  border-radius: 15px;
+  background-color: var(--primary-color);
+  font-size: 1.125rem;
+  cursor:pointer;
+`
+
+
+export { AuthButton, AuthFormButton };

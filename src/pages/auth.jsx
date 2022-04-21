@@ -21,7 +21,7 @@ const Auth = () => {
   return (
     <MainContainer auth={!showModal}>
       {showModal ? (
-        <AuthModal showLoginComponent={showLogin} showModal={setShowModal} />
+        <AuthModal showLogin={showLogin} setShowModal={setShowModal} setShowLogin={setShowLogin} />
       ) : (
         <>
           <Container flex fd={'column'}>
