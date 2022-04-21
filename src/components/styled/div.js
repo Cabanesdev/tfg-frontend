@@ -1,5 +1,4 @@
-import styled from 'styled-components';
-import { css } from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const flexOpt = (fd, jc, ai) => css`
   display: flex;
@@ -50,28 +49,39 @@ const AuthModalContainer = styled(Container)`
 const AuthFormContainer = styled(Container)`
   & > * {
     margin: 30px;
+
+    ${({ register }) =>
+      register &&
+      css`
+        margin: 15px;
+      `}
   }
 
   & > p {
-    color:white;
+    color: white;
   }
 
   & > p > span {
-    color:var(--primary-color);
+    color: var(--primary-color);
   }
-
 
   & > p > span:hover {
-    cursor:pointer;
-    text-decoration:underline;
+    cursor: pointer;
+    text-decoration: underline;
   }
-`
+`;
 
 const AuthInputContainer = styled(Container)`
   max-width: 380px;
-  border-radius:10px;
+  border-radius: 10px;
   padding: 5px;
   background-color: var(--secondary-color);
-`
+`;
 
-export { MainContainer, Container, AuthModalContainer, AuthFormContainer, AuthInputContainer };
+export {
+  MainContainer,
+  Container,
+  AuthModalContainer,
+  AuthFormContainer,
+  AuthInputContainer,
+};

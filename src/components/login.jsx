@@ -1,17 +1,17 @@
-import { useRef, useState } from "react";
-import { MainTitle } from "./styled/title";
-import { AuthFormContainer, AuthInputContainer } from "./styled/div";
-import { AuthInput } from "./styled/input";
-import { AuthFormButton } from "./styled/button";
-import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+import { useRef, useState } from 'react';
+import { MainTitle } from './styled/title';
+import { AuthFormContainer, AuthInputContainer } from './styled/div';
+import { AuthInput } from './styled/input';
+import { AuthFormButton } from './styled/button';
+import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 
 const LoginForm = ({ setShowLogin }) => {
-  const [inputType, setInputType] = useState("password");
+  const [inputType, setInputType] = useState('password');
   const usernameRef = useRef({});
   const passwordRef = useRef({});
-  const ICON_COLOR = { color: "white" };
+  const ICON_COLOR = { color: 'white' };
 
-  const handleLoginOnClick = () => {
+  const handleButtonOnClick = () => {
     const data = {
       username: usernameRef.current.value,
       password: passwordRef.current.value,
@@ -21,49 +21,49 @@ const LoginForm = ({ setShowLogin }) => {
     console.log(data);
   };
 
-  const showPassword = () => {
-    const type = inputType === "password" ? "text" : "password";
+  const handleClickPassIcon = () => {
+    const type = inputType === 'password' ? 'text' : 'password';
     setInputType(type);
   };
 
   return (
     <>
-      <MainTitle ta={"center"} c={"var(--primary-color)"} fs={"4.5rem"}>
+      <MainTitle ta={'center'} c={'var(--primary-color)'} fs={'4.5rem'}>
         Login
       </MainTitle>
       <AuthFormContainer
         flex
-        fd={"column"}
-        ai={"center"}
-        w={"100%"}
-        mt={"97px"}
+        fd={'column'}
+        ai={'center'}
+        w={'100%'}
+        mt={'97px'}
       >
-        <AuthInputContainer w={"85%"}>
-          <AuthInput ref={usernameRef} placeholder="Username" />
+        <AuthInputContainer w={'85%'}>
+          <AuthInput ref={usernameRef} placeholder='Username' />
         </AuthInputContainer>
-        <AuthInputContainer w={"85%"} flex ai={"center"}>
+        <AuthInputContainer w={'85%'} flex ai={'center'}>
           <AuthInput
             ref={passwordRef}
-            placeholder="Password"
+            placeholder='Password'
             type={inputType}
           />
-          {inputType === "password" ? (
+          {inputType === 'password' ? (
             <AiFillEyeInvisible
               size={15}
               style={ICON_COLOR}
-              onClick={() => showPassword(passwordRef)}
+              onClick={() => handleClickPassIcon(passwordRef)}
             />
           ) : (
             <AiFillEye
               size={15}
               style={ICON_COLOR}
-              onClick={() => showPassword(passwordRef)}
+              onClick={() => handleClickPassIcon(passwordRef)}
             />
           )}
         </AuthInputContainer>
-        <AuthFormButton onClick={handleLoginOnClick}>Login</AuthFormButton>
+        <AuthFormButton onClick={handleButtonOnClick}>Login</AuthFormButton>
         <p>
-          New to codex?{" "}
+          New to codex?{' '}
           <span onClick={() => setShowLogin(false)}>Create and account.</span>
         </p>
       </AuthFormContainer>
