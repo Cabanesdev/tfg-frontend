@@ -47,6 +47,7 @@ const Register = ({ setShowLogin }) => {
       <MainTitle ta={'center'} c={'var(--primary-color)'} fs={'4.5rem'}>
         Register
       </MainTitle>
+    <form>
       <AuthFormContainer flex register fd={'column'} ai={'center'} w={'100%'}>
         <AuthInputContainer w={'85%'}>
           <AuthInput ref={nameRef} placeholder='Name' />
@@ -99,6 +100,7 @@ const Register = ({ setShowLogin }) => {
           <span onClick={() => setShowLogin(true)}>Login.</span>
         </p>
       </AuthFormContainer>
+    </form>
     </>
   );
 };

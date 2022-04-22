@@ -31,6 +31,7 @@ const LoginForm = ({ setShowLogin }) => {
       <MainTitle ta={'center'} c={'var(--primary-color)'} fs={'4.5rem'}>
         Login
       </MainTitle>
+    <form>
       <AuthFormContainer
         flex
         fd={'column'}
@@ -67,6 +68,7 @@ const LoginForm = ({ setShowLogin }) => {
           <span onClick={() => setShowLogin(false)}>Create and account.</span>
         </p>
       </AuthFormContainer>
+    </form>
     </>
   );
 };
