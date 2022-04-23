@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { ToastContainer } from 'react-toastify';
 import AuthModal from '../components/authModal';
 import { Container, MainContainer } from '../components/styled/div';
 import { MainTitle, SecondaryTitle } from '../components/styled/title';
@@ -53,6 +54,7 @@ const Auth = () => {
           </Container>
         </>
       )}
+      <ToastContainer theme='dark' />
     </MainContainer>
   );
 };

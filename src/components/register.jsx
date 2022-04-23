@@ -1,4 +1,6 @@
 import { useRef, useState } from 'react';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import { MainTitle } from './styled/title';
 import { AuthFormContainer, AuthInputContainer } from './styled/div';
@@ -29,16 +31,32 @@ const Register = ({ setShowLogin }) => {
       password: passwordRef.current.value,
     };
 
-    console.log(data);
     registerUser(data)
   };
 
   const registerUser = async (data) => {
-    const api = new Api()
+    try {
+      const api = new Api()
 
-    const response = await api.register(data)
-    console.log(response)
+      const response = await api.register(data)
+
+      toast.success(response.data.message, {
+        autoClose: 2500,
+        pauseOnHover: false,
+      });
+
+    setShowLogin(true)
+      
+    } catch (err) {
+      if (err.response) {
+        toast.error(err.response.data.data, {
+          autoClose: 2500,
+          pauseOnHover: false,
+        });
+      }
+    }
   }
+
 
   const showPassword = () => {
     const type = passInputType === 'password' ? 'text' : 'password';
