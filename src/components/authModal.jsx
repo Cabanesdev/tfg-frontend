@@ -3,7 +3,7 @@ import { AuthModalContainer, MainContainer, Container } from './styled/div';
 import Login from './login';
 import Register from './register';
 
-const AuthModal = ({ showLogin, setShowModal, setShowLogin}) => {
+function AuthModal({ showLogin, setShowModal, setShowLogin}) {
   return (
     <MainContainer authModal>
       <AuthModalContainer flex w={'40%'} h={'80%'} fd={'column'}>

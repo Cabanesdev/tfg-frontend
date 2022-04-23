@@ -8,7 +8,7 @@ import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import Api from '../utils/api';
 import { saveSession } from '../utils/localstorage';
 
-const LoginForm = ({ setShowLogin }) => {
+function LoginForm({ setShowLogin }) {
   const [inputType, setInputType] = useState('password');
   const usernameRef = useRef({});
   const passwordRef = useRef({});
@@ -34,7 +34,7 @@ const LoginForm = ({ setShowLogin }) => {
         autoClose: 1000,
         pauseOnHover: false,
       });
-      
+
     } catch (err) {
       if (err.response) {
         toast.error(err.response.data.data, {
@@ -55,42 +55,42 @@ const LoginForm = ({ setShowLogin }) => {
       <MainTitle ta={'center'} c={'var(--primary-color)'} fs={'4.5rem'}>
         Login
       </MainTitle>
-        <AuthFormContainer
-          flex
-          fd={'column'}
-          ai={'center'}
-          w={'100%'}
-          mt={'97px'}
-        >
-          <AuthInputContainer w={'85%'}>
-            <AuthInput ref={usernameRef} placeholder="Username" />
-          </AuthInputContainer>
-          <AuthInputContainer w={'85%'} flex ai={'center'}>
-            <AuthInput
-              ref={passwordRef}
-              placeholder="Password"
-              type={inputType}
+      <AuthFormContainer
+        flex
+        fd={'column'}
+        ai={'center'}
+        w={'100%'}
+        mt={'97px'}
+      >
+        <AuthInputContainer w={'85%'}>
+          <AuthInput ref={usernameRef} placeholder="Username" />
+        </AuthInputContainer>
+        <AuthInputContainer w={'85%'} flex ai={'center'}>
+          <AuthInput
+            ref={passwordRef}
+            placeholder="Password"
+            type={inputType}
+          />
+          {inputType === 'password' ? (
+            <AiFillEyeInvisible
+              size={15}
+              style={ICON_COLOR}
+              onClick={() => handleClickPassIcon(passwordRef)}
             />
-            {inputType === 'password' ? (
-              <AiFillEyeInvisible
-                size={15}
-                style={ICON_COLOR}
-                onClick={() => handleClickPassIcon(passwordRef)}
-              />
-            ) : (
-              <AiFillEye
-                size={15}
-                style={ICON_COLOR}
-                onClick={() => handleClickPassIcon(passwordRef)}
-              />
-            )}
-          </AuthInputContainer>
-          <AuthFormButton onClick={handleButtonOnClick}>Login</AuthFormButton>
-          <p>
-            New to codex?{' '}
-            <span onClick={() => setShowLogin(false)}>Create and account.</span>
-          </p>
-        </AuthFormContainer>
+          ) : (
+            <AiFillEye
+              size={15}
+              style={ICON_COLOR}
+              onClick={() => handleClickPassIcon(passwordRef)}
+            />
+          )}
+        </AuthInputContainer>
+        <AuthFormButton onClick={handleButtonOnClick}>Login</AuthFormButton>
+        <p>
+          New to codex?{' '}
+          <span onClick={() => setShowLogin(false)}>Create and account.</span>
+        </p>
+      </AuthFormContainer>
     </>
   );
 };

@@ -11,7 +11,7 @@ import {
   NavbarContainer,
 } from './styled/div';
 
-const Navbar = ({ user, showModal }) => {
+function Navbar({ user, showModal }) {
   return (
     <NavbarContainer>
       <LogoContainer>

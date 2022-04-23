@@ -5,7 +5,7 @@ import {
   PostsContainer,
 } from '../components/styled/div';
 
-const Home = () => {
+function Home() {
   return (
     <MainContainer>
       <Container w={'100%'} h={'100%'} flex>
