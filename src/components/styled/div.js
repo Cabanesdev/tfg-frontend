@@ -6,17 +6,19 @@ const flexOpt = (fd, jc, ai) => css`
   justify-content: ${jc};
   align-items: ${ai};
 `;
+
 const MainContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   width: 100%;
   height: 100%;
+  background-color: var(--secondary-color-1);
 
   ${({ auth }) =>
     auth &&
     css`
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       background: linear-gradient(0deg, var(--secondary-color), #1b4e4d);
       background-size: 100% 100%;
       animation: wave 30s ease infinite;
@@ -51,8 +53,8 @@ const AuthFormContainer = styled(Container)`
     margin: 30px;
 
     ${({ register }) =>
-      register &&
-      css`
+    register &&
+    css`
         margin: 15px;
       `}
   }
