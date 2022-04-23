@@ -53,8 +53,8 @@ const AuthFormContainer = styled(Container)`
     margin: 30px;
 
     ${({ register }) =>
-    register &&
-    css`
+      register &&
+      css`
         margin: 15px;
       `}
   }
@@ -80,10 +80,71 @@ const AuthInputContainer = styled(Container)`
   background-color: var(--secondary-color);
 `;
 
+const NavbarContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-end;
+  width: 15%;
+  height: 100%;
+  padding: 10px;
+  border-bottom: 1px solid black;
+  border-radius: 2.5px;
+`;
+
+const LogoContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  margin: 5px;
+
+  & > a > img {
+    width: 50px;
+  }
+`;
+
+const NavbarActionsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+
+  & > * {
+    margin: 15px;
+  }
+`;
+
+const PostsContainer = styled.div`
+  width: 60%;
+  height: 100%;
+  padding: 15px;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  ${({ border }) =>
+    border &&
+    css`
+      border-left: 2px solid var(--secondary-color);
+      border-right: 2px solid var(--secondary-color);
+    `}
+
+  ${({ flex }) =>
+    flex &&
+    css`
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    `}
+`;
+
 export {
   MainContainer,
   Container,
   AuthModalContainer,
   AuthFormContainer,
   AuthInputContainer,
+  NavbarContainer,
+  LogoContainer,
+  NavbarActionsContainer,
+  PostsContainer,
 };

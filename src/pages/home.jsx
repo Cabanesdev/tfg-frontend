@@ -1,11 +1,19 @@
-import {Container, MainContainer} from '../components/styled/div'
+import Navbar from '../components/navbar';
+import {
+  Container,
+  MainContainer,
+  PostsContainer,
+} from '../components/styled/div';
 
 const Home = () => {
   return (
     <MainContainer>
-    <Container w={"100%"} h={"100%"} flex></Container>
+      <Container w={'100%'} h={'100%'} flex>
+        <Navbar user={null} />
+        <PostsContainer border></PostsContainer>
+      </Container>
     </MainContainer>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
