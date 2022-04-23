@@ -1,9 +1,10 @@
 import { useRef, useState } from 'react';
+import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import { MainTitle } from './styled/title';
 import { AuthFormContainer, AuthInputContainer } from './styled/div';
 import { AuthInput } from './styled/input';
 import { AuthFormButton } from './styled/button';
-import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
+import Api from '../utils/api'
 
 const Register = ({ setShowLogin }) => {
   const [passInputType, setPassInputType] = useState('password');
@@ -15,7 +16,7 @@ const Register = ({ setShowLogin }) => {
   const repeatPasswordRef = useRef({});
   const ICON_COLOR = { color: 'white' };
 
-  const handleLoginOnClick = () => {
+  const handleResgisterOnClick = () => {
     if (passwordRef.current.value !== repeatPasswordRef.current.value) {
       console.log('The password doesnt match');
       return;
@@ -28,9 +29,16 @@ const Register = ({ setShowLogin }) => {
       password: passwordRef.current.value,
     };
 
-    // Call api function
     console.log(data);
+    registerUser(data)
   };
+
+  const registerUser = async (data) => {
+    const api = new Api()
+
+    const response = await api.register(data)
+    console.log(response)
+  }
 
   const showPassword = () => {
     const type = passInputType === 'password' ? 'text' : 'password';
@@ -47,7 +55,6 @@ const Register = ({ setShowLogin }) => {
       <MainTitle ta={'center'} c={'var(--primary-color)'} fs={'4.5rem'}>
         Register
       </MainTitle>
-    <form>
       <AuthFormContainer flex register fd={'column'} ai={'center'} w={'100%'}>
         <AuthInputContainer w={'85%'}>
           <AuthInput ref={nameRef} placeholder='Name' />
@@ -94,13 +101,12 @@ const Register = ({ setShowLogin }) => {
             />
           )}
         </AuthInputContainer>
-        <AuthFormButton onClick={handleLoginOnClick}>Login</AuthFormButton>
+        <AuthFormButton onClick={handleResgisterOnClick}>Register</AuthFormButton>
         <p>
           Already have and account?{' '}
           <span onClick={() => setShowLogin(true)}>Login.</span>
         </p>
       </AuthFormContainer>
-    </form>
     </>
   );
 };
