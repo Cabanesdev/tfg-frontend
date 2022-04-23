@@ -137,6 +137,26 @@ const PostsContainer = styled.div`
     `}
 `;
 
+
+const CardContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  margin-bottom: 2rem;
+  border: 1px solid black;
+  padding: 5px;
+  cursor: pointer;
+  box-shadow: 5px 5px 5px #192038;
+
+  &:hover {
+    box-shadow: 0px 3px 3px #0d101c;
+  }
+
+  & > * {
+    margin: 2.5px;
+  }
+`;
+
 export {
   MainContainer,
   Container,
@@ -147,4 +167,5 @@ export {
   LogoContainer,
   NavbarActionsContainer,
   PostsContainer,
+  CardContainer
 };
