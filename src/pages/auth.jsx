@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import AuthModal from '../components/authModal';
 import { Container, MainContainer } from '../components/styled/div';
 import { MainTitle, SecondaryTitle } from '../components/styled/title';
@@ -21,7 +23,11 @@ const Auth = () => {
   return (
     <MainContainer auth={!showModal}>
       {showModal ? (
-        <AuthModal showLogin={showLogin} setShowModal={setShowModal} setShowLogin={setShowLogin} />
+        <AuthModal
+          showLogin={showLogin}
+          setShowModal={setShowModal}
+          setShowLogin={setShowLogin}
+        />
       ) : (
         <>
           <Container flex fd={'column'}>
@@ -39,7 +45,7 @@ const Auth = () => {
               fs={'2.5rem'}
               fw={400}
             >
-              &lt;Where coders <br /> <span className='color'>connect</span>
+              &lt;Where coders <br /> <span className="color">connect</span>
               /&gt;
             </SecondaryTitle>
           </Container>
@@ -53,6 +59,7 @@ const Auth = () => {
           </Container>
         </>
       )}
+      <ToastContainer theme="dark"/>
     </MainContainer>
   );
 };
