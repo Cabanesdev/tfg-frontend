@@ -21,7 +21,13 @@ function Auth() {
   };
 
   return (
-    <MainContainer auth={!showModal}>
+    <MainContainer 
+    flex 
+    fd={'column'}
+    jc={'center'}
+    ai={'center'}
+    auth={!showModal}
+    >
       {showModal ? (
         <AuthModal
           showLogin={showLogin}
@@ -59,9 +65,9 @@ function Auth() {
           </Container>
         </>
       )}
-      <ToastContainer theme="dark"/>
+      <ToastContainer theme="dark" />
     </MainContainer>
   );
-};
+}
 
 export default Auth;
