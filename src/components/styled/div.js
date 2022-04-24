@@ -127,6 +127,7 @@ const NavbarActionsContainer = styled.div`
 
 const PostsContainer = styled.div`
   width: 60%;
+  min-width: 320px;
 
   ${({ border }) =>
     border &&
