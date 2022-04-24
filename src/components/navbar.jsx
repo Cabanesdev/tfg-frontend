@@ -22,18 +22,15 @@ function Navbar({ user, showModal }) {
       <NavbarActionsContainer>
         {user ? (
           <>
-            <Link to={`/user/${user.userId}`}>
+            <Link to={`/user/${user._id}`}>
               <BiUser size={30} style={{ color: 'white' }} />
-            </Link>
-            <Link to="/feed">
-              <FiRss size={30} style={{ color: 'white' }} />
             </Link>
             <FiLogOut
               size={30}
               style={{ color: 'white' }}
               onClick={() => showModal(true)}
             />
-            <Link to="/news/create">
+            <Link to="/post/create">
               <BsPlusCircle size={25} style={{ color: 'white' }} />
             </Link>
           </>
