@@ -60,7 +60,7 @@ function LoginForm({ setShowLogin }) {
         fd={'column'}
         ai={'center'}
         w={'100%'}
-        mt={'97px'}
+        m={'97px 0 0 0'}
       >
         <AuthInputContainer w={'85%'}>
           <AuthInput ref={usernameRef} placeholder="Username" />

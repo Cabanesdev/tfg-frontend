@@ -36,9 +36,16 @@ const MainContainer = styled.div`
 const Container = styled.div`
   width: ${(props) => props.w};
   height: ${(props) => props.h};
-  margin-top: ${(props) => props.mt};
+  margin: ${(props) => props.m};
+  padding: ${(props) => props.p};
 
   ${({ flex, fd, jc, ai }) => flex && flexOpt(fd, jc, ai)}
+
+  ${({ postUD }) => postUD && css`
+      & > * {
+        margin: 2.5px;
+      }
+    `}
 `;
 
 const AuthModalContainer = styled(Container)`
@@ -53,8 +60,8 @@ const AuthFormContainer = styled(Container)`
     margin: 30px;
 
     ${({ register }) =>
-      register &&
-      css`
+    register &&
+    css`
         margin: 15px;
       `}
   }
@@ -117,7 +124,6 @@ const NavbarActionsContainer = styled.div`
 const PostsContainer = styled.div`
   width: 60%;
   height: 100%;
-  padding: 15px;
   overflow-y: auto;
   overflow-x: hidden;
 
@@ -141,20 +147,10 @@ const PostsContainer = styled.div`
 const CardContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 90%;
-  margin-bottom: 2rem;
-  border: 1px solid black;
-  padding: 5px;
+  background-color: var(--secondary-color-1);
+  width: 100%;
+  border-bottom: 2px solid var(--secondary-color);
   cursor: pointer;
-  box-shadow: 5px 5px 5px #192038;
-
-  &:hover {
-    box-shadow: 0px 3px 3px #0d101c;
-  }
-
-  & > * {
-    margin: 2.5px;
-  }
 `;
 
 export {
@@ -167,5 +163,5 @@ export {
   LogoContainer,
   NavbarActionsContainer,
   PostsContainer,
-  CardContainer
+  CardContainer,
 };

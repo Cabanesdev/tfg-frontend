@@ -49,7 +49,7 @@ function Auth() {
               /&gt;
             </SecondaryTitle>
           </Container>
-          <Container flex fd={'column'} mt={'90px'}>
+          <Container flex fd={'column'} m={'90px 0 0 0'}>
             <AuthButton login onClick={handleLoginOnClick}>
               Login
             </AuthButton>
