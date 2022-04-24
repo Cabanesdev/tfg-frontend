@@ -23,11 +23,6 @@ const MainContainer = styled.div`
       animation: wave 30s ease infinite;
     `}
 
-  ${({ authModal }) =>
-    authModal &&
-    css`
-      background-color: var(--secondary-color-1);
-    `}
 `;
 
 const Container = styled.div`

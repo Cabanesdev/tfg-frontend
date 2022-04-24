@@ -5,8 +5,8 @@ import Home from './pages/home';
 function App() {
   return (
     <Routes>
-      <Route path='/' element={<Home />} />
-      <Route path='/auth' element={<Auth />} />
+      <Route path="/" element={<Home />} />
+      <Route path="/auth" element={<Auth />} />
     </Routes>
   );
 }
