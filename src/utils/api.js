@@ -26,5 +26,7 @@ export default class Api {
   login = (data) => this.init().post('/user/login', data);
 
   getUserById = (id) => this.init().get(`/user/${id}`);
+
+  getPosts = (page) => this.init().get(`/post?page=${page}`);
 }
 

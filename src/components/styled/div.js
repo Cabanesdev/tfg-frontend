@@ -151,6 +151,7 @@ const CardContainer = styled.div`
   width: 100%;
   border-bottom: 2px solid var(--secondary-color);
   cursor: pointer;
+
 `;
 
 export {

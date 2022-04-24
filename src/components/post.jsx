@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react'
 import { CgProfile } from 'react-icons/cg'
 import { FaRegComment } from 'react-icons/fa'
-import { Container } from './styled/div'
 import Api from '../utils/api.js'
-import { usernameFormatter } from '../utils/formatters.js'
+import { dateFormatter, usernameFormatter } from '../utils/formatters.js'
+import { Container } from './styled/div'
+import { MainTitle } from './styled/title'
 
 function Post({ data }) {
   const [userData, setUserData] = useState({})
@@ -33,11 +34,14 @@ function Post({ data }) {
         </Container>
       </Container>
       <Container p={'0 0 0 40px'}>
-        <h1>{data.title}</h1>
-        <Container flex m={'10px 0 0 0'}>
-            <Container flex ai={'center'} postUD>
+        <MainTitle post>{data.title}</MainTitle>
+        <Container flex jc={'space-between'} m={'10px 0 0 0'} >
+            <Container postUD flex ai={'center'} >
               <FaRegComment size={15}/>
-              {'89 comments'}
+              {data.comments}
+            </Container>
+            <Container flex ai={'center'} >
+              {dateFormatter(data.creationDate)}
             </Container>
         </Container>
       </Container>
