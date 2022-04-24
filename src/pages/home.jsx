@@ -23,7 +23,6 @@ function Home() {
 
   const getPosts = async () => {
     const api = new Api()
-    console.log(page)
     const response = await api.getPosts(page)
     setPostData([...postData, ...response.data.data])
   }
