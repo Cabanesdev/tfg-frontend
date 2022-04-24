@@ -11,6 +11,7 @@ const MainContainer = styled.div`
   width: 100%;
   height: 100%;
   background-color: var(--secondary-color-1);
+  overflow: hidden;
 
   ${({ auth }) =>
     auth &&
@@ -38,6 +39,8 @@ const Container = styled.div`
   height: ${(props) => props.h};
   margin: ${(props) => props.m};
   padding: ${(props) => props.p};
+  overflow-y: ${(props) => props.of_y};
+  overflow-x: ${(props) => props.of_x};
 
   ${({ flex, fd, jc, ai }) => flex && flexOpt(fd, jc, ai)}
 
@@ -46,6 +49,7 @@ const Container = styled.div`
         margin: 2.5px;
       }
     `}
+
 `;
 
 const AuthModalContainer = styled(Container)`
@@ -123,9 +127,6 @@ const NavbarActionsContainer = styled.div`
 
 const PostsContainer = styled.div`
   width: 60%;
-  height: 100%;
-  overflow-y: auto;
-  overflow-x: hidden;
 
   ${({ border }) =>
     border &&

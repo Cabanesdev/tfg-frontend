@@ -27,7 +27,6 @@ function LoginForm({ setShowLogin }) {
       const api = new Api();
 
       const response = await api.login(data);
-      console.log(response)
 
       saveSession(response.headers['bearer-token'])
       toast.success(response.data.data, {
