@@ -7,7 +7,7 @@ import { AuthInput } from './styled/input';
 import { AuthFormButton } from './styled/button';
 import Api from '../utils/api';
 
-const Register = ({ setShowLogin }) => {
+function Register({ setShowLogin }) {
   const [passInputType, setPassInputType] = useState('password');
   const [repeatPassInputType, setRepeatPassInputType] = useState('password');
   const nameRef = useRef({});

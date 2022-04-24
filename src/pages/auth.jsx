@@ -6,7 +6,7 @@ import { Container, MainContainer } from '../components/styled/div';
 import { MainTitle, SecondaryTitle } from '../components/styled/title';
 import { AuthButton } from '../components/styled/button';
 
-const Auth = () => {
+function Auth() {
   const [showModal, setShowModal] = useState(false);
   const [showLogin, setShowLogin] = useState(true);
 
@@ -49,7 +49,7 @@ const Auth = () => {
               /&gt;
             </SecondaryTitle>
           </Container>
-          <Container flex fd={'column'} mt={'90px'}>
+          <Container flex fd={'column'} m={'90px 0 0 0'}>
             <AuthButton login onClick={handleLoginOnClick}>
               Login
             </AuthButton>
