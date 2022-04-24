@@ -11,6 +11,7 @@ const AuthButton = styled.button`
   ${({ login }) =>
     login &&
     css`
+      color:black;
       margin-bottom: 40px;
       background-color: var(--primary-color);
     `}
