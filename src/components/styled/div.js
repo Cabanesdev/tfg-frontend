@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import MDEditor from '@uiw/react-md-editor';
 
 const flexOpt = (fd, jc, ai) => css`
   display: flex;
@@ -42,7 +43,14 @@ const Container = styled.div`
         margin: 2.5px;
       }
     `}
-`;
+
+  ${({ create }) =>
+    create && css`
+      max-height: 750px;
+      background-color: var(--secondary-color);
+      border-radius: 5px;
+  `}
+`
 
 const AuthModalContainer = styled(Container)`
   min-width: 400px;
@@ -161,6 +169,27 @@ const PostView = styled.div`
   }
 `
 
+const MDEditorStyled = styled(MDEditor)`
+  width: 100%;
+  background-color: var(--secondary-color);
+  box-shadow:none;
+
+  & > div {
+    padding: 0;
+  }
+
+  & > .w-md-editor-content {
+    height: 100%;
+    background-color: var(--secondary-color);
+  }
+    
+  & > .w-md-editor-bar {
+    display:none;
+  }
+
+  
+`
+
 export {
   MainContainer,
   Container,
@@ -172,5 +201,6 @@ export {
   NavbarActionsContainer,
   PostsContainer,
   CardContainer,
-  PostView
+  PostView,
+  MDEditorStyled
 };
