@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
 import { CgProfile } from 'react-icons/cg'
 import { FaRegComment } from 'react-icons/fa'
+import { Link } from 'react-router-dom'
 import Api from '../utils/api.js'
 import { dateFormatter, usernameFormatter } from '../utils/formatters.js'
 import { Container } from './styled/div'
-import { MainTitle } from './styled/title'
+import { FifthlyTitle, ForthlyTitle, MainTitle } from './styled/title'
 
 function Post({ data }) {
   const [userData, setUserData] = useState({})
@@ -28,20 +29,22 @@ function Post({ data }) {
       <Container postUD flex ai={'center'}>
         <CgProfile size={25} />
         <Container postUD >
-          <h4>{userData.name}</h4>
-          <h5>{usernameFormatter(userData.username)}</h5>
+          <ForthlyTitle>{userData.name}</ForthlyTitle>
+          <FifthlyTitle>{usernameFormatter(userData.username)}</FifthlyTitle>
         </Container>
       </Container>
       <Container p={'0 0 0 40px'}>
-        <MainTitle post>{data.title}</MainTitle>
+        <Link to={`/post/${data._id}`}>
+          <MainTitle fs={'1.3rem'} post>{data.title}</MainTitle>
+        </Link>
         <Container flex jc={'space-between'} m={'10px 0 0 0'} >
-            <Container postUD flex ai={'center'} >
-              <FaRegComment size={15}/>
-              {data.comments}
-            </Container>
-            <Container flex ai={'center'} >
-              {dateFormatter(data.creationDate)}
-            </Container>
+          <Container postUD flex ai={'center'} >
+            <FaRegComment size={15} />
+            {data.comments}
+          </Container>
+          <Container flex ai={'center'} >
+            {dateFormatter(data.creationDate)}
+          </Container>
         </Container>
       </Container>
     </Container>
