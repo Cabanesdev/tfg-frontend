@@ -56,8 +56,8 @@ const AuthFormContainer = styled(Container)`
     margin: 30px;
 
     ${({ register }) =>
-      register &&
-      css`
+    register &&
+    css`
         margin: 15px;
       `}
   }
@@ -143,8 +143,23 @@ const CardContainer = styled.div`
   background-color: var(--secondary-color-1);
   width: 100%;
   border-bottom: 2px solid var(--secondary-color);
-  cursor: pointer;
+
+  & > * {
+    color: white;
+  }
 `;
+
+const PostView = styled.div`
+  width: 100%;
+  margin: 10px 0 0 0;
+  padding: 20px;
+  border: 2px solid var(--secondary-color);
+  border-radius: 5px;
+
+  & > * {
+    color: white;
+  }
+`
 
 export {
   MainContainer,
@@ -157,4 +172,5 @@ export {
   NavbarActionsContainer,
   PostsContainer,
   CardContainer,
+  PostView
 };

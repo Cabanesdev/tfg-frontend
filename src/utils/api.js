@@ -31,5 +31,7 @@ export default class Api {
 
   getPosts = (page) => this.init().get(`/post?page=${page}`);
 
+  getPostById = (id) => this.init().get(`/post/${id}`);
+
 }
 

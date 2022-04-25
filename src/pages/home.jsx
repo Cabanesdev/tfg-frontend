@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Api from '../utils/api';
 import infiniteScroll from '../utils/scroll';
-import {getSession} from '../utils/localstorage';
+import { getSession } from '../utils/localstorage';
 
 import Navbar from '../components/navbar';
 import Card from '../components/card';
@@ -15,40 +15,25 @@ import {
 
 function Home() {
   const [postData, setPostData] = useState([])
-  const [userData, setUserData] = useState(null)
+  const [showPosts, setShowPosts] = useState(true)
   const [page, setPage] = useState(1)
   const divRef = useRef()
-  const api = new Api()
-
-
-  useEffect(() => {
-    const token = getSession()
-    if(token) getUserSession()
-
-  }, [])
-
 
   useEffect(() => {
     getPosts()
   }, [page])
 
   const getPosts = async () => {
+    const api = new Api()
     const response = await api.getPosts(page)
     setPostData([...postData, ...response.data.data])
   }
 
-  const getUserSession = async () => {
-    try{
-      const response  = await api.getSession()
-      setUserData(response.data.data)
-    } catch(err){
-    }
-  }
 
   return (
     <MainContainer>
       <Container w={'100%'} h={'100%'} flex>
-        <Navbar user={userData} />
+        <Navbar showPosts={showPosts}/>
         <Container
           w={'100%'}
           h={'100%'}
