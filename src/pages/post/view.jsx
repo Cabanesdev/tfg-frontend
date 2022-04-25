@@ -16,17 +16,17 @@ function ViewPost() {
 
   useEffect(() => { 
     getPost(); 
-    getUserData() 
   }, [id])
 
   const getPost = async () => {
     const response = await api.getPostById(id)
     if (!response.data.data) return navigate('/')
     setPostData(response.data.data)
+    getUserData(response.data.data.userId) 
   }
 
-  const getUserData = async () => {
-    const response = await api.getUserById(postData.userId)
+  const getUserData = async (userId) => {
+    const response = await api.getUserById(userId)
     setUserData(response.data.data)
   }
 
