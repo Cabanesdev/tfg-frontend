@@ -21,7 +21,6 @@ function Post({ data }) {
     } catch (err) {
       if (err.response) { }
     }
-
   }
 
   return (

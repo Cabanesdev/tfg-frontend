@@ -13,25 +13,16 @@ const MainContainer = styled.div`
   background-color: var(--secondary-color-1);
   overflow: hidden;
 
+  ${({ flex, fd, jc, ai }) => flex && flexOpt(fd, jc, ai)}
+
   ${({ auth }) =>
     auth &&
     css`
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
       background: linear-gradient(0deg, var(--secondary-color), #1b4e4d);
       background-size: 100% 100%;
       animation: wave 30s ease infinite;
     `}
 
-  ${({ authModal }) =>
-    authModal &&
-    css`
-      padding: 20px;
-      background-color: var(--secondary-color-1);
-      position: absolute;
-    `}
 `;
 
 const Container = styled.div`
@@ -44,12 +35,13 @@ const Container = styled.div`
 
   ${({ flex, fd, jc, ai }) => flex && flexOpt(fd, jc, ai)}
 
-  ${({ postUD }) => postUD && css`
+  ${({ postUD }) =>
+    postUD &&
+    css`
       & > * {
         margin: 2.5px;
       }
     `}
-
 `;
 
 const AuthModalContainer = styled(Container)`
@@ -64,8 +56,8 @@ const AuthFormContainer = styled(Container)`
     margin: 30px;
 
     ${({ register }) =>
-    register &&
-    css`
+      register &&
+      css`
         margin: 15px;
       `}
   }
@@ -145,7 +137,6 @@ const PostsContainer = styled.div`
     `}
 `;
 
-
 const CardContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -153,7 +144,6 @@ const CardContainer = styled.div`
   width: 100%;
   border-bottom: 2px solid var(--secondary-color);
   cursor: pointer;
-
 `;
 
 export {

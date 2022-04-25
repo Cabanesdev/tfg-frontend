@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { MainTitle } from './styled/title';
 import { AuthFormContainer, AuthInputContainer } from './styled/div';
@@ -10,6 +11,7 @@ import { saveSession } from '../utils/localstorage';
 
 function LoginForm({ setShowLogin }) {
   const [inputType, setInputType] = useState('password');
+  const navigate = useNavigate();
   const usernameRef = useRef({});
   const passwordRef = useRef({});
   const ICON_COLOR = { color: 'white' };
@@ -28,12 +30,13 @@ function LoginForm({ setShowLogin }) {
 
       const response = await api.login(data);
 
-      saveSession(response.headers['bearer-token'])
+      saveSession(response.headers['bearer-token']);
       toast.success(response.data.data, {
         autoClose: 1000,
         pauseOnHover: false,
       });
 
+      navigate('/');
     } catch (err) {
       if (err.response) {
         toast.error(err.response.data.data, {
@@ -92,6 +95,6 @@ function LoginForm({ setShowLogin }) {
       </AuthFormContainer>
     </>
   );
-};
+}
 
 export default LoginForm;
