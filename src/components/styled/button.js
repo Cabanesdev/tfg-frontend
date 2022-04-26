@@ -49,8 +49,29 @@ const CreatePostButton = styled.button`
   &:hover {   
     border: 2px solid var(--primary-color);
   }
+`
 
+const CreateCommentButton = styled.button`
+  width: 20%;
+  height: 100%;
+  max-width: 380px;
+  color: white;
+  border: 2px solid var(--secondary-color);
+  background: transparent;
+  font-size: 0.8rem;
+  cursor:pointer;
+
+  ${({  disabled }) =>
+    !disabled && css`
+      &:hover {   
+        border: 2px solid var(--primary-color);
+      }
+    
+  `}
+  
 `
 
 
-export { AuthButton, AuthFormButton, CreatePostButton };
+
+
+export { AuthButton, AuthFormButton, CreatePostButton, CreateCommentButton };

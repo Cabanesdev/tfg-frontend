@@ -1,13 +1,9 @@
 import styled from 'styled-components';
 
-const CreateTextArea = styled.textarea`
-  width: 90%;
-  margin: 20px;
+
+const TextArea = styled.textarea`
   border: none;
-  color: white;
-  background-color: var(--secondary-color);
   resize: none;
-  font-size: 2rem;
 
   &:focus {
     outline: none;
@@ -15,4 +11,22 @@ const CreateTextArea = styled.textarea`
 
 `
 
-export default CreateTextArea
+const CreateTextArea = styled(TextArea)`
+  width: 90%;
+  margin: 20px;
+  color: white;
+  background-color: var(--secondary-color);
+  font-size: 2rem;
+`
+
+const CreateCommentTextArea = styled(TextArea)`
+  width: 100%;
+  height: 80%;
+  color: white;
+  padding: 2px;
+  background-color: var(--secondary-color);
+`
+
+
+
+export {CreateTextArea, CreateCommentTextArea}

@@ -50,6 +50,13 @@ const Container = styled.div`
       background-color: var(--secondary-color);
       border-radius: 5px;
   `}
+
+  ${({ createComment }) =>
+    createComment && css`
+      max-width: 400px;
+      border: 3px solid var(--secondary-color);
+      border-radius: 5px;
+  `}
 `
 
 const AuthModalContainer = styled(Container)`
@@ -186,8 +193,9 @@ const MDEditorStyled = styled(MDEditor)`
   & > .w-md-editor-bar {
     display:none;
   }
+`
 
-  
+const CommentsContainer = styled.div`
 `
 
 export {

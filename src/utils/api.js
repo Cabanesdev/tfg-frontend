@@ -35,5 +35,7 @@ export default class Api {
 
   createPost = (data) => this.init().post('/post', data);
 
+  createComment = (data) => this.init().post('/comment', data);
+
 }
 
