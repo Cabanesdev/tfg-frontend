@@ -50,6 +50,13 @@ const Container = styled.div`
       background-color: var(--secondary-color);
       border-radius: 5px;
   `}
+
+  ${({ createComment }) =>
+    createComment && css`
+      max-width: 400px;
+      border: 3px solid var(--secondary-color);
+      border-radius: 5px;
+  `}
 `
 
 const AuthModalContainer = styled(Container)`
@@ -126,7 +133,7 @@ const NavbarActionsContainer = styled.div`
 `;
 
 const PostsContainer = styled.div`
-  width: 60%;
+  width: 80%;
   min-width: 320px;
 
   ${({ border }) =>
@@ -163,6 +170,7 @@ const PostView = styled.div`
   padding: 20px;
   border: 2px solid var(--secondary-color);
   border-radius: 5px;
+  overflow:auto;
 
   & > * {
     color: white;
@@ -186,8 +194,18 @@ const MDEditorStyled = styled(MDEditor)`
   & > .w-md-editor-bar {
     display:none;
   }
+`
 
-  
+const CommentContainer = styled.div`
+  width: 90%;
+  margin: 20px 0 0 0;
+  padding: 5px;
+  background-color: var(--secondary-color);
+  border-radius: 5px;
+
+  & > div > p {
+    word-break: break-word;
+  }
 `
 
 export {
@@ -202,5 +220,6 @@ export {
   PostsContainer,
   CardContainer,
   PostView,
-  MDEditorStyled
+  MDEditorStyled,
+  CommentContainer,
 };

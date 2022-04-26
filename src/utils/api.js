@@ -1,4 +1,5 @@
 import * as axios from "axios";
+import * as qs from "qs";
 import { getSession } from './localstorage';
 
 
@@ -34,6 +35,14 @@ export default class Api {
   getPostById = (id) => this.init().get(`/post/${id}`);
 
   createPost = (data) => this.init().post('/post', data);
+
+  getComments = (params) => {
+    const parsedParams = qs.stringify(params)
+    return this.init().get(`/comment?${parsedParams}`);
+  }
+
+  createComment = (data) => this.init().post('/comment', data);
+
 
 }
 

@@ -6,7 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Api from "../../utils/api"
 import { Container, MainContainer, MDEditorStyled } from "../../components/styled/div"
 import { CreatePostButton } from "../../components/styled/button"
-import CreateTextArea from "../../components/styled/textarea"
+import { CreateTextArea } from "../../components/styled/textarea"
 
 function CreatePost() {
   const [value, setValue] = useState()
@@ -27,13 +27,14 @@ function CreatePost() {
         content: value
       }
 
-      console.log(data)
       await api.createPost(data)
       toast.success('Post created succesfully', {
         autoClose: 1000,
         pauseOnHover: false,
       })
-      navigate('/home')
+
+      setTimeout(() => navigate('/'), 2000)
+
     } catch (err) {
       if (err.response) toast.error(err.response.data.data, {
         autoClose: 1500,
@@ -61,7 +62,7 @@ function CreatePost() {
         </Container>
       </Container>
       <Container postUD flex jc={'flex-end'} w={'80%'}>
-        <CreatePostButton onClick={()=>{navigate('/')}}>Discard</CreatePostButton>
+        <CreatePostButton onClick={() => { navigate('/') }}>Discard</CreatePostButton>
         <CreatePostButton onClick={createPost}>Create</CreatePostButton>
       </Container>
       <ToastContainer theme="dark" />
