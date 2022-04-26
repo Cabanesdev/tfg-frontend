@@ -33,5 +33,7 @@ export default class Api {
 
   getPostById = (id) => this.init().get(`/post/${id}`);
 
+  createPost = (data) => this.init().post('/post', data);
+
 }
 

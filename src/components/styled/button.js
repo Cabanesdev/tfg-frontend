@@ -36,4 +36,21 @@ const AuthFormButton = styled.button`
 `
 
 
-export { AuthButton, AuthFormButton };
+const CreatePostButton = styled.button`
+  width: 50%;
+  color: white;
+  height: 40px;
+  max-width: 380px;
+  border: 2px solid var(--secondary-color);
+  background: transparent;
+  font-size: 0.8rem;
+  cursor:pointer;
+
+  &:hover {   
+    border: 2px solid var(--primary-color);
+  }
+
+`
+
+
+export { AuthButton, AuthFormButton, CreatePostButton };

@@ -56,7 +56,7 @@ function Navbar({ showModal, showPosts }) {
               style={{ color: 'white' }}
               onClick={() => showModal(true)}
             />
-            <Link to='/post/create'>
+            <Link to='/post/new'>
               <BsPlusCircle size={25} style={{ color: 'white' }} />
             </Link>
           </>
