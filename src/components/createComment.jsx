@@ -4,7 +4,7 @@ import { Container } from "./styled/div"
 import { CreateCommentTextArea } from "./styled/textarea"
 import { CreateCommentButton } from "./styled/button"
 
-function CreateComment({ postId }) {
+function CreateComment({ postId, getPost }) {
   const [value, setValue] = useState(null)
   const textAreaRef = useRef({})
 
@@ -16,6 +16,7 @@ function CreateComment({ postId }) {
       };
       const api = new Api()
       await api.createComment(data)
+      getPost()
       setValue('')
       textAreaRef.current.value = ''
       
