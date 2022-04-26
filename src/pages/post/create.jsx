@@ -33,7 +33,9 @@ function CreatePost() {
         autoClose: 1000,
         pauseOnHover: false,
       })
-      navigate('/home')
+
+      setTimeout(() =>navigate('/'), 2000 )
+      
     } catch (err) {
       if (err.response) toast.error(err.response.data.data, {
         autoClose: 1500,

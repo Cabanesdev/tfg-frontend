@@ -8,6 +8,7 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
+      <Route path="/home" element={<Home />} />
       <Route path="/auth" element={<Auth />} />
       <Route path="/post/new" element={<CreatePost/>} />
       <Route path="/post/:id" element={<ViewPost/>} />
