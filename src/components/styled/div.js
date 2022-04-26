@@ -23,7 +23,6 @@ const MainContainer = styled.div`
       background-size: 100% 100%;
       animation: wave 30s ease infinite;
     `}
-
 `;
 
 const Container = styled.div`
@@ -71,6 +70,15 @@ const Container = styled.div`
       border: 3px solid var(--secondary-color);
       border-radius: 5px;
   `}
+
+    ${({ userData }) =>
+    userData && css`
+      & > * {
+        color: white;
+        word-break: break-word;
+        font-size: 0.8rem;
+      }
+    `}
 `
 
 const AuthModalContainer = styled(Container)`

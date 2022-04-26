@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import Api from '../utils/api'
 import { usernameFormatter } from '../utils/formatters'
@@ -27,11 +27,14 @@ function User() {
   const [userData, setUserData] = useState({})
   const navigate = useNavigate()
   const location = useLocation()
+  const { id } = useParams()
   const api = new Api()
 
   useEffect(() => {
     if (location.pathname === '/profile') {
       getSession()
+    } else {
+      getUserData()
     }
   }, [])
 
@@ -47,6 +50,12 @@ function User() {
 
       }
     }
+  }
+
+  const getUserData = async () => {
+    const response = await api.getUserById(id)
+    setUserData(response.data.data)
+    getPostData(response.data.data._id)
   }
 
   const getPostData = async (userId) => {
@@ -105,15 +114,9 @@ function User() {
                     {usernameFormatter(userData.username)}
                   </SecondaryTitle>
                   {userData.biography ?
-                    <p>{userData.biography}</p>
-                    : null
-                  }
-                  {userData.webpage ?
-                    <a
-                      href={userData.webpage}
-                      target='_blank'>
-                      {userData.webpage}
-                    </a>
+                    <Container userData m={'10px 0 0 0'}>
+                      <p>{userData.biography}</p>
+                    </Container>
                     : null
                   }
                 </Container>
