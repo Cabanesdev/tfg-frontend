@@ -30,7 +30,10 @@ export default class Api {
 
   getUserById = (id) => this.init().get(`/user/${id}`);
 
-  getPosts = (page) => this.init().get(`/post?page=${page}`);
+  getPosts = (params) =>  {
+    const parsedParams = qs.stringify(params)
+    return this.init().get(`/post?${parsedParams}`);
+  }
 
   getPostById = (id) => this.init().get(`/post/${id}`);
 

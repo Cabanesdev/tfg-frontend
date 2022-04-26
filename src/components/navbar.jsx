@@ -14,7 +14,7 @@ import {
   NavbarContainer,
 } from './styled/div';
 
-function Navbar({ showModal, showPosts }) {
+function Navbar({ showModal}) {
 
   const [userData, setUserData] = useState(null)
 
@@ -48,7 +48,7 @@ function Navbar({ showModal, showPosts }) {
             <Link to='/'>
               <BiSearch size={25} />
             </Link>
-            <Link to={`/user/${userData._id}`}>
+            <Link to={`/profile`}>
               <BiUser size={30}  />
             </Link>
             <FiLogOut

@@ -44,6 +44,20 @@ const Container = styled.div`
       }
     `}
 
+  ${({ bh }) =>
+    bh &&
+    css`
+      border-left: 2px solid var(--secondary-color);
+      border-right: 2px solid var(--secondary-color);
+    `}
+
+ ${({ bv }) =>
+    bv &&
+    css`
+      border-top: 2px solid var(--secondary-color);
+      border-bottom: 2px solid var(--secondary-color);
+    `}
+
   ${({ create }) =>
     create && css`
       max-height: 750px;
@@ -132,7 +146,7 @@ const NavbarActionsContainer = styled.div`
   }
 `;
 
-const PostsContainer = styled.div`
+const PostsContainer = styled(Container)`
   width: 80%;
   min-width: 320px;
 
