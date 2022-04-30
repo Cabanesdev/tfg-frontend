@@ -65,7 +65,6 @@ function User() {
     }
 
     const response = await api.getPosts(params)
-    console.log(response)
     setPostData([...postData, ...response.data.data])
   }
 
