@@ -27,9 +27,9 @@ function CreatePost() {
         content: value
       }
 
-      await api.createPost(data)
-      toast.success('Post created succesfully', {
-        autoClose: 1000,
+      const response = await api.createPost(data)
+      toast.success(response.data.data, {
+        autoClose: 1500,
         pauseOnHover: false,
       })
 
@@ -37,7 +37,7 @@ function CreatePost() {
 
     } catch (err) {
       if (err.response) toast.error(err.response.data.data, {
-        autoClose: 1500,
+        autoClose: 2000,
         pauseOnHover: false,
       })
     }

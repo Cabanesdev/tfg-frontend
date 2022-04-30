@@ -19,9 +19,6 @@ const dateFormatter = (date) => {
 };
 
 const datePostFormatter = (date) => {
-  const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
-    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-  ];
 
   const formatedDate = new Date(date);
 
@@ -29,11 +26,19 @@ const datePostFormatter = (date) => {
     ? `0${formatedDate.getDate()}`
     : formatedDate.getDate();
 
-  const month = monthNames[formatedDate.getMonth()]
+  const month = formatedDate.toLocaleString('default', { month: 'short' });
 
-  const year = formatedDate.getFullYear().toString().substr(-2)
+  const year = formatedDate.getFullYear().toString().slice(-2);
 
   return `${month} ${day} '${year}`
 }
 
-export { usernameFormatter, dateFormatter, datePostFormatter }
+const profileDateFormatter = (date) => {
+  const formatedDate = new Date(date);
+  const month = formatedDate.toLocaleString('default', { month: 'long' });
+  const year = formatedDate.getFullYear().toString().slice(-2)
+
+  return `${month} ${year}`
+}
+
+export { usernameFormatter, dateFormatter, datePostFormatter, profileDateFormatter }

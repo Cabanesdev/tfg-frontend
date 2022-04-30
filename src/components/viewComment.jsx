@@ -1,4 +1,5 @@
 import { CgProfile } from 'react-icons/cg'
+import { Link } from 'react-router-dom'
 import { datePostFormatter } from '../utils/formatters'
 import { CommentContainer, Container } from './styled/div'
 import { ForthlyTitle, FifthlyTitle } from './styled/title'
@@ -9,7 +10,7 @@ function ViewComment({ userData, commentData }) {
       <Container postUD flex ai={'center'}>
         <CgProfile size={25} />
         <Container postUD >
-          <ForthlyTitle>{userData.name}</ForthlyTitle>
+          <ForthlyTitle><Link to={`/user/${userData._id}`}>{userData.name}</Link></ForthlyTitle>
           <FifthlyTitle>Posted on {datePostFormatter(commentData.creationDate)}</FifthlyTitle>
         </Container>
       </Container>

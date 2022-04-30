@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import Api from '../utils/api'
-import { usernameFormatter } from '../utils/formatters'
+import { profileDateFormatter, usernameFormatter } from '../utils/formatters'
 import { deleteSession } from '../utils/localstorage';
 
 import Navbar from '../components/navbar';
@@ -15,6 +15,7 @@ import {
 } from '../components/styled/div';
 import { MainTitle, SecondaryTitle } from '../components/styled/title';
 import { EditButton, SectionButton } from '../components/styled/button';
+import { BsCalendar3 } from 'react-icons/bs';
 
 
 
@@ -112,12 +113,20 @@ function User() {
                     fs={'0.8rem'}>
                     {usernameFormatter(userData.username)}
                   </SecondaryTitle>
-                  {userData.biography ?
-                    <Container userData m={'10px 0 0 0'}>
-                      <p>{userData.biography}</p>
+                  <Container m={'30px 0 0 0'}>
+                    {userData.biography ?
+                      <Container userData m={'10px 0 0 0'}>
+                        <p>{userData.biography}</p>
+                      </Container>
+                      : null
+                    }
+                    <Container flex ai={'center'} userData >
+                      <Container flex ai={'center'} m={'0 5px 0 0'} >
+                        <BsCalendar3 style={{ color: 'var(--grey)' }} />
+                      </Container>
+                      <p>Joined {profileDateFormatter(userData.creationDate)}</p>
                     </Container>
-                    : null
-                  }
+                  </Container>
                 </Container>
                 {location.pathname === '/profile' ?
                   (

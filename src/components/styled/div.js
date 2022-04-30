@@ -187,7 +187,7 @@ const CardContainer = styled.div`
 `;
 
 const PostView = styled.div`
-  width: 100%;
+  width: 85%;
   max-width: 1000px;
   height: fit-content;
   margin: 10px 0 0 0;
@@ -220,7 +220,7 @@ const MDEditorStyled = styled(MDEditor)`
 `
 
 const CommentContainer = styled.div`
-  width: 90%;
+  max-width: 900px;
   margin: 20px 0 0 0;
   padding: 5px;
   background-color: var(--secondary-color);
