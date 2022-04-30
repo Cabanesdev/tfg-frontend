@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import Api from '../utils/api';
 import infiniteScroll from '../utils/scroll';
-import { getSession } from '../utils/localstorage';
 
 import Navbar from '../components/navbar';
 import Card from '../components/card';
@@ -15,7 +14,6 @@ import {
 
 function Home() {
   const [postData, setPostData] = useState([])
-  const [showPosts, setShowPosts] = useState(true)
   const [page, setPage] = useState(1)
   const divRef = useRef()
 
@@ -23,9 +21,10 @@ function Home() {
     getPosts()
   }, [page])
 
-  const getPosts = async () => {
+ const getPosts = async () => {
+   const params = {page}
     const api = new Api()
-    const response = await api.getPosts(page)
+    const response = await api.getPosts(params)
     setPostData([...postData, ...response.data.data])
   }
 
@@ -33,7 +32,7 @@ function Home() {
   return (
     <MainContainer>
       <Container w={'100%'} h={'100%'} flex>
-        <Navbar showPosts={showPosts}/>
+        <Navbar />
         <Container
           w={'100%'}
           h={'100%'}

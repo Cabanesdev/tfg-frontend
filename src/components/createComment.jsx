@@ -31,7 +31,7 @@ function CreateComment({ postId, getPost }) {
   }
 
   return (
-    <Container createComment w={'100%'} h={'150px'} m={'10px 0 0 0'} p={'10px'} >
+    <Container createComment h={'150px'} m={'10px 0 0 0'} p={'10px'} >
       <CreateCommentTextArea
         ref={textAreaRef}
         onChange={handleTextAreaOnChange}

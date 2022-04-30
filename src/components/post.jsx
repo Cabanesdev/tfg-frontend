@@ -28,9 +28,11 @@ function Post({ data }) {
     <Container flex fd={'column'} p={'20px'}>
       <Container postUD flex ai={'center'}>
         <CgProfile size={25} />
-        <Container postUD >
-          <ForthlyTitle>{userData.name}</ForthlyTitle>
-          <FifthlyTitle>{usernameFormatter(userData.username)}</FifthlyTitle>
+        <Container postUD  >
+          <Link to={`/user/${userData._id}`}>
+            <ForthlyTitle>{userData.name}</ForthlyTitle>
+            <FifthlyTitle>{usernameFormatter(userData.username)}</FifthlyTitle>
+          </Link>
         </Container>
       </Container>
       <Container p={'0 0 0 40px'}>

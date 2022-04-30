@@ -23,7 +23,6 @@ const MainContainer = styled.div`
       background-size: 100% 100%;
       animation: wave 30s ease infinite;
     `}
-
 `;
 
 const Container = styled.div`
@@ -44,6 +43,20 @@ const Container = styled.div`
       }
     `}
 
+  ${({ bh }) =>
+    bh &&
+    css`
+      border-left: 2px solid var(--secondary-color);
+      border-right: 2px solid var(--secondary-color);
+    `}
+
+ ${({ bv }) =>
+    bv &&
+    css`
+      border-top: 2px solid var(--secondary-color);
+      border-bottom: 2px solid var(--secondary-color);
+    `}
+
   ${({ create }) =>
     create && css`
       max-height: 750px;
@@ -57,6 +70,15 @@ const Container = styled.div`
       border: 3px solid var(--secondary-color);
       border-radius: 5px;
   `}
+
+    ${({ userData }) =>
+    userData && css`
+      & > * {
+        color: white;
+        word-break: break-word;
+        font-size: 0.8rem;
+      }
+    `}
 `
 
 const AuthModalContainer = styled(Container)`
@@ -132,7 +154,7 @@ const NavbarActionsContainer = styled.div`
   }
 `;
 
-const PostsContainer = styled.div`
+const PostsContainer = styled(Container)`
   width: 80%;
   min-width: 320px;
 
@@ -166,11 +188,12 @@ const CardContainer = styled.div`
 
 const PostView = styled.div`
   width: 100%;
+  max-width: 1000px;
+  height: fit-content;
   margin: 10px 0 0 0;
   padding: 20px;
   border: 2px solid var(--secondary-color);
   border-radius: 5px;
-  overflow:auto;
 
   & > * {
     color: white;

@@ -61,17 +61,42 @@ const CreateCommentButton = styled.button`
   font-size: 0.8rem;
   cursor:pointer;
 
-  ${({  disabled }) =>
+  ${({ disabled }) =>
     !disabled && css`
       &:hover {   
         border: 2px solid var(--primary-color);
       }
     
   `}
-  
 `
 
+const EditButton = styled.button`
+  width: 100px;
+  height: 25px;
+  color: var(--white);
+  background: none;
+  border: 1px solid var(--grey);
+  border-radius: 25px;
 
+  &:hover {
+  border: 1px solid var(--primary-color);
+  }
+`
 
+const SectionButton = styled.button`
+  border: none;
+  color: var(--white);
+  font-size: 1rem;
+  background-color: transparent;
 
-export { AuthButton, AuthFormButton, CreatePostButton, CreateCommentButton };
+  &:hover {
+    cursor: pointer;
+  }
+
+  ${({ active }) =>
+    active && css`
+      border-bottom: 1px solid var(--primary-color);
+    `}
+`;
+
+export { AuthButton, AuthFormButton, CreatePostButton, CreateCommentButton, EditButton, SectionButton };
