@@ -48,7 +48,7 @@ function ViewPost() {
   return (
     <MainContainer flex>
       <Navbar />
-      <Container flex w={'80%'}>
+      <Container flex w={'100%'} of_y={'auto'}>
         <PostView>
           <Container postUD flex ai={'center'}>
             <CgProfile size={25} />

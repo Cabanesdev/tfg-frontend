@@ -188,11 +188,12 @@ const CardContainer = styled.div`
 
 const PostView = styled.div`
   width: 100%;
+  max-width: 1000px;
+  height: fit-content;
   margin: 10px 0 0 0;
   padding: 20px;
   border: 2px solid var(--secondary-color);
   border-radius: 5px;
-  overflow:auto;
 
   & > * {
     color: white;
