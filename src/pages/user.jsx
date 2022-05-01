@@ -5,9 +5,12 @@ import Api from '../utils/api'
 import { profileDateFormatter, usernameFormatter } from '../utils/formatters'
 import { deleteSession, getSession } from '../utils/localstorage';
 
+import Modal from '../components/modal';
+import LogOut from '../components/logOut';
 import Navbar from '../components/navbar';
 import Card from '../components/card';
 import Post from '../components/post';
+import EditUser from '../components/editUser';
 
 import {
   Container,
@@ -19,6 +22,8 @@ import { BsCalendar3 } from 'react-icons/bs';
 
 function User() {
   const [isPostActive, setIsPostActive] = useState(true);
+  const [editUserModal, setEditUserModal] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const [isCommitActived, setIsCommitActive] = useState(false);
   const [postData, setPostData] = useState([]);
   const [page, setPage] = useState(1);
@@ -94,7 +99,7 @@ function User() {
   return (
     <MainContainer>
       <Container w={'100%'} h={'100%'} flex>
-        <Navbar />
+        <Navbar showModal={setShowModal} />
         <Container
           w={'100%'}
           h={'100%'}
@@ -136,7 +141,7 @@ function User() {
                 {location.pathname === '/profile' ?
                   (
                     <Container flex jc={'flex-end'}>
-                      <EditButton>Edit</EditButton>
+                      <EditButton onClick={() => setEditUserModal(true)} >Edit</EditButton>
                     </Container>
                   ) : null}
               </Container>
@@ -165,6 +170,8 @@ function User() {
           </Container>
         </Container>
       </Container>
+      {showModal ? <Modal><LogOut closeModal={setShowModal} /></Modal> : null}
+      {editUserModal ? <EditUser close={setEditUserModal} /> : null}
     </MainContainer>
   )
 }

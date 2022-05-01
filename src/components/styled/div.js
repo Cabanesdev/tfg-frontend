@@ -258,6 +258,21 @@ const ModalCenterContainer = styled.div`
   background-color: var(--secondary-color-1);
 `;
 
+const EditUserContainer = styled.div`
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -25%);
+  width: 80%;
+  height: 500px;
+  max-width: 700px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  background-color: var(--secondary-color-1);
+  padding:10px;
+
+`;
+
 
 export {
   MainContainer,
@@ -274,5 +289,6 @@ export {
   MDEditorStyled,
   CommentContainer,
   ModalContainer,
-  ModalCenterContainer
+  ModalCenterContainer,
+  EditUserContainer
 };
