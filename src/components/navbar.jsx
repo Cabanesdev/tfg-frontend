@@ -23,7 +23,7 @@ function Navbar({ showModal }) {
   useEffect(() => {
     const token = getSession()
     if (token) getUserSession()
-    if (location.pathname === '/' || location.pathname === '/')
+    if (location.pathname === '/' || location.pathname === '/home')
       setIsHomePage(true);
   }, [])
 

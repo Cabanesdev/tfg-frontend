@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import Api from '../utils/api'
-import { usernameFormatter } from '../utils/formatters'
-import { deleteSession } from '../utils/localstorage';
+import { profileDateFormatter, usernameFormatter } from '../utils/formatters'
+import { deleteSession, getSession } from '../utils/localstorage';
 
 import Navbar from '../components/navbar';
 import Card from '../components/card';
@@ -15,56 +15,62 @@ import {
 } from '../components/styled/div';
 import { MainTitle, SecondaryTitle } from '../components/styled/title';
 import { EditButton, SectionButton } from '../components/styled/button';
-
-
-
+import { BsCalendar3 } from 'react-icons/bs';
 
 function User() {
   const [isPostActive, setIsPostActive] = useState(true);
   const [isCommitActived, setIsCommitActive] = useState(false);
   const [postData, setPostData] = useState([]);
   const [page, setPage] = useState(1);
-  const [userData, setUserData] = useState({})
-  const navigate = useNavigate()
-  const location = useLocation()
-  const { id } = useParams()
-  const api = new Api()
+  const [userData, setUserData] = useState({});
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { id } = useParams();
+  const api = new Api();
 
   useEffect(() => {
     if (location.pathname === '/profile') {
-      getSession()
+      getUserSession();
     } else {
-      getUserData()
+      const token = getSession();
+      if (token)
+        checkIfUserIsSession();
+      getUserData();
     }
   }, [])
 
-  const getSession = async () => {
+  const getUserSession = async () => {
     try {
-      const response = await api.getSession()
-      setUserData(response.data.data)
-      getPostData(response.data.data._id)
+      const response = await api.getSession();
+      setUserData(response.data.data);
+      getPostData(response.data.data._id);
     } catch (err) {
       if (err.response.status === 401) {
-        deleteSession()
-        navigate('/auth')
-
+        deleteSession();
+        navigate('/auth');
       }
     }
   }
 
   const getUserData = async () => {
-    const response = await api.getUserById(id)
-    setUserData(response.data.data)
-    getPostData(response.data.data._id)
+    const response = await api.getUserById(id);
+    setUserData(response.data.data);
+    getPostData(response.data.data._id);
+  }
+
+
+  const checkIfUserIsSession = async () => {
+    const response = await api.getSession();
+    if (response.data.data._id === id) navigate('/profile');
   }
 
   const getPostData = async (userId) => {
     const params = {
       userId,
       page
-    }
+    };
 
-    const response = await api.getPosts(params)
+    const response = await api.getPosts(params);
     setPostData([...postData, ...response.data.data])
   }
 
@@ -112,12 +118,20 @@ function User() {
                     fs={'0.8rem'}>
                     {usernameFormatter(userData.username)}
                   </SecondaryTitle>
-                  {userData.biography ?
-                    <Container userData m={'10px 0 0 0'}>
-                      <p>{userData.biography}</p>
+                  <Container m={'30px 0 0 0'}>
+                    {userData.biography ?
+                      <Container userData m={'10px 0 0 0'}>
+                        <p>{userData.biography}</p>
+                      </Container>
+                      : null
+                    }
+                    <Container flex ai={'center'} userData >
+                      <Container flex ai={'center'} m={'0 5px 0 0'} >
+                        <BsCalendar3 style={{ color: 'var(--grey)' }} />
+                      </Container>
+                      <p>Joined {profileDateFormatter(userData.creationDate)}</p>
                     </Container>
-                    : null
-                  }
+                  </Container>
                 </Container>
                 {location.pathname === '/profile' ?
                   (

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -14,9 +14,9 @@ function Auth() {
   const [showLogin, setShowLogin] = useState(true);
   const navigate = useNavigate()
 
-  useEffect(()=> {
+  useEffect(() => {
     const token = getSession()
-    if(token) navigate('/')
+    if (token) navigate('/')
   }, [])
 
   const handleLoginOnClick = () => {
@@ -30,12 +30,12 @@ function Auth() {
   };
 
   return (
-    <MainContainer 
-    flex 
-    fd={'column'}
-    jc={'center'}
-    ai={'center'}
-    auth={!showModal}
+    <MainContainer
+      flex
+      fd={'column'}
+      jc={'center'}
+      ai={'center'}
+      auth={!showModal}
     >
       {showModal ? (
         <AuthModal
@@ -46,21 +46,23 @@ function Auth() {
       ) : (
         <>
           <Container flex fd={'column'}>
-            <MainTitle
-              ta={'center'}
-              c={'var(--primary-color)'}
-              fs={'6.5rem'}
-              fw={400}
-            >
-              Codex
-            </MainTitle>
+            <Link to='/'>
+              <MainTitle
+                ta={'center'}
+                c={'var(--primary-color)'}
+                fs={'6.5rem'}
+                fw={400}
+              >
+                Codex
+              </MainTitle>
+            </Link>
             <SecondaryTitle
               ta={'center'}
               c={'var(--white)'}
               fs={'2.5rem'}
               fw={400}
             >
-              &lt;Where coders <br /> <span className="color">connect</span>
+              &lt;Where coders <br /><span>connect</span>
               /&gt;
             </SecondaryTitle>
           </Container>

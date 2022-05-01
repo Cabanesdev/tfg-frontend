@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -7,12 +7,17 @@ import Api from "../../utils/api"
 import { Container, MainContainer, MDEditorStyled } from "../../components/styled/div"
 import { CreatePostButton } from "../../components/styled/button"
 import { CreateTextArea } from "../../components/styled/textarea"
+import { getSession } from "../../utils/localstorage";
 
 function CreatePost() {
   const [value, setValue] = useState()
   const titleRef = useRef({})
   const navigate = useNavigate()
 
+  useEffect(() => {
+    const token = getSession();
+    if (!token) navigate('/');
+  }, [])
 
   const changeTextArea = () => {
     titleRef.current.style.height = 'auto';
@@ -27,9 +32,9 @@ function CreatePost() {
         content: value
       }
 
-      await api.createPost(data)
-      toast.success('Post created succesfully', {
-        autoClose: 1000,
+      const response = await api.createPost(data)
+      toast.success(response.data.data, {
+        autoClose: 1500,
         pauseOnHover: false,
       })
 
@@ -37,7 +42,7 @@ function CreatePost() {
 
     } catch (err) {
       if (err.response) toast.error(err.response.data.data, {
-        autoClose: 1500,
+        autoClose: 2000,
         pauseOnHover: false,
       })
     }
@@ -46,7 +51,7 @@ function CreatePost() {
 
   return (
     <MainContainer flex fd={'column'} jc={'center'} ai={'center'}>
-      <Container create fd={'column'} w={'80%'} h={'100%'} m={'20px 0 0 0'} of_y={'auto'} >
+      <Container create fd={'column'} w={'80%'} h={'100%'} m={'20px 0 0 0'} of_y={'auto'} mw={'1000px'}>
         <CreateTextArea
           ref={titleRef}
           onChange={changeTextArea}
@@ -61,7 +66,7 @@ function CreatePost() {
             textareaProps={{ height: '100%', placeholder: 'New Post Content here...' }} />
         </Container>
       </Container>
-      <Container postUD flex jc={'flex-end'} w={'80%'}>
+      <Container postUD flex jc={'flex-end'} w={'80%'} mw={'1000px'}>
         <CreatePostButton onClick={() => { navigate('/') }}>Discard</CreatePostButton>
         <CreatePostButton onClick={createPost}>Create</CreatePostButton>
       </Container>

@@ -28,6 +28,7 @@ const MainContainer = styled.div`
 const Container = styled.div`
   width: ${(props) => props.w};
   height: ${(props) => props.h};
+  max-width: ${(props) => props.mw};
   margin: ${(props) => props.m};
   padding: ${(props) => props.p};
   overflow-y: ${(props) => props.of_y};
@@ -77,6 +78,13 @@ const Container = styled.div`
         color: white;
         word-break: break-word;
         font-size: 0.8rem;
+      }
+    `}
+
+    ${({ modalContent }) =>
+    modalContent && css`
+      & > * {
+        color: white;
       }
     `}
 `
@@ -187,7 +195,7 @@ const CardContainer = styled.div`
 `;
 
 const PostView = styled.div`
-  width: 100%;
+  width: 85%;
   max-width: 1000px;
   height: fit-content;
   margin: 10px 0 0 0;
@@ -220,7 +228,7 @@ const MDEditorStyled = styled(MDEditor)`
 `
 
 const CommentContainer = styled.div`
-  width: 90%;
+  max-width: 900px;
   margin: 20px 0 0 0;
   padding: 5px;
   background-color: var(--secondary-color);
@@ -230,6 +238,26 @@ const CommentContainer = styled.div`
     word-break: break-word;
   }
 `
+
+const ModalContainer = styled.div`
+  position: absolute;
+  top: 0%;
+  width: 100%;
+  height: 100%;
+  background-color: #080707d9;
+`;
+
+const ModalCenterContainer = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 200px;
+  border: 1px solid black;
+  background-color: var(--secondary-color-1);
+`;
+
 
 export {
   MainContainer,
@@ -245,4 +273,6 @@ export {
   PostView,
   MDEditorStyled,
   CommentContainer,
+  ModalContainer,
+  ModalCenterContainer
 };

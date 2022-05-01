@@ -1,29 +1,36 @@
 import { useRef, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import Api from "../utils/api"
 import { Container } from "./styled/div"
 import { CreateCommentTextArea } from "./styled/textarea"
 import { CreateCommentButton } from "./styled/button"
+import { getSession } from "../utils/localstorage"
 
 function CreateComment({ postId, getPost }) {
   const [value, setValue] = useState(null)
+  const navigate = useNavigate()
   const textAreaRef = useRef({})
 
   const handleCreateButton = async () => {
-    try{
+    try {
+      const token = getSession();
+      if (!token) navigate('/auth');
+
       const data = {
         postId,
         content: textAreaRef.current.value
       };
+
       const api = new Api()
-      await api.createComment(data)
+      await api.createComffsent(data)
       getPost()
-      setValue('')
+      // setValue('')
       textAreaRef.current.value = ''
-      
-    }catch(err) {
-      if(err.response) console.log(err.response.data.data)
+
+    } catch (err) {
+      if (err.response) console.log(err.response.data.data)
     }
-  
+
   }
 
   const handleTextAreaOnChange = () => {

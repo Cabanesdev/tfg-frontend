@@ -7,6 +7,8 @@ import { datePostFormatter } from "../../utils/formatters";
 import Navbar from "../../components/navbar"
 import CreateComment from "../../components/createComment"
 import ViewComment from "../../components/viewComment"
+import Modal from '../../components/modal';
+import LogOut from '../../components/logOut';
 
 import { Container, MainContainer, PostView, CommentContainer } from "../../components/styled/div"
 import { FifthlyTitle, ForthlyTitle, MainTitle, ThirdlyTitle } from "../../components/styled/title"
@@ -14,6 +16,8 @@ import { FifthlyTitle, ForthlyTitle, MainTitle, ThirdlyTitle } from "../../compo
 function ViewPost() {
   const [postData, setPostData] = useState({})
   const [commentsData, setCommentsData] = useState([])
+  const [showModal, setShowModal] = useState(false);
+
   const [page, setPage] = useState(1)
   const [userData, setUserData] = useState({})
   const navigate = useNavigate()
@@ -47,7 +51,7 @@ function ViewPost() {
 
   return (
     <MainContainer flex>
-      <Navbar />
+      <Navbar showModal={setShowModal}/>
       <Container flex w={'100%'} of_y={'auto'}>
         <PostView>
           <Container postUD flex ai={'center'}>
@@ -77,6 +81,7 @@ function ViewPost() {
           </Container>
         </PostView>
       </Container>
+      {showModal ? <Modal><LogOut closeModal={setShowModal} /></Modal> : null}
     </MainContainer>
   )
 }

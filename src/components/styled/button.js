@@ -99,4 +99,18 @@ const SectionButton = styled.button`
     `}
 `;
 
-export { AuthButton, AuthFormButton, CreatePostButton, CreateCommentButton, EditButton, SectionButton };
+
+const ModalButton = styled.button`
+  width: 60px;
+  height: 25px;
+  border: none;
+  border-radius: 2.5px;
+  font-size: 0.9rem;
+  box-shadow: 5px 5px 15px var(--black);
+
+  &:hover {
+    box-shadow: 10px 10px 15px var(--black);
+    cursor: pointer;
+  }
+`
+export { AuthButton, AuthFormButton, CreatePostButton, CreateCommentButton, EditButton, SectionButton, ModalButton };
