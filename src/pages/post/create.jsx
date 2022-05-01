@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -7,12 +7,17 @@ import Api from "../../utils/api"
 import { Container, MainContainer, MDEditorStyled } from "../../components/styled/div"
 import { CreatePostButton } from "../../components/styled/button"
 import { CreateTextArea } from "../../components/styled/textarea"
+import { getSession } from "../../utils/localstorage";
 
 function CreatePost() {
   const [value, setValue] = useState()
   const titleRef = useRef({})
   const navigate = useNavigate()
 
+  useEffect(() => {
+    const token = getSession();
+    if (!token) navigate('/');
+  }, [])
 
   const changeTextArea = () => {
     titleRef.current.style.height = 'auto';

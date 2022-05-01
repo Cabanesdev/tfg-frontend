@@ -3,7 +3,7 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import Api from '../utils/api'
 import { profileDateFormatter, usernameFormatter } from '../utils/formatters'
-import { deleteSession } from '../utils/localstorage';
+import { deleteSession, getSession } from '../utils/localstorage';
 
 import Navbar from '../components/navbar';
 import Card from '../components/card';
@@ -17,55 +17,60 @@ import { MainTitle, SecondaryTitle } from '../components/styled/title';
 import { EditButton, SectionButton } from '../components/styled/button';
 import { BsCalendar3 } from 'react-icons/bs';
 
-
-
-
 function User() {
   const [isPostActive, setIsPostActive] = useState(true);
   const [isCommitActived, setIsCommitActive] = useState(false);
   const [postData, setPostData] = useState([]);
   const [page, setPage] = useState(1);
-  const [userData, setUserData] = useState({})
-  const navigate = useNavigate()
-  const location = useLocation()
-  const { id } = useParams()
-  const api = new Api()
+  const [userData, setUserData] = useState({});
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { id } = useParams();
+  const api = new Api();
 
   useEffect(() => {
     if (location.pathname === '/profile') {
-      getSession()
+      getUserSession();
     } else {
-      getUserData()
+      const token = getSession();
+      if (token)
+        checkIfUserIsSession();
+      getUserData();
     }
   }, [])
 
-  const getSession = async () => {
+  const getUserSession = async () => {
     try {
-      const response = await api.getSession()
-      setUserData(response.data.data)
-      getPostData(response.data.data._id)
+      const response = await api.getSession();
+      setUserData(response.data.data);
+      getPostData(response.data.data._id);
     } catch (err) {
       if (err.response.status === 401) {
-        deleteSession()
-        navigate('/auth')
-
+        deleteSession();
+        navigate('/auth');
       }
     }
   }
 
   const getUserData = async () => {
-    const response = await api.getUserById(id)
-    setUserData(response.data.data)
-    getPostData(response.data.data._id)
+    const response = await api.getUserById(id);
+    setUserData(response.data.data);
+    getPostData(response.data.data._id);
+  }
+
+
+  const checkIfUserIsSession = async () => {
+    const response = await api.getSession();
+    if (response.data.data._id === id) navigate('/profile');
   }
 
   const getPostData = async (userId) => {
     const params = {
       userId,
       page
-    }
+    };
 
-    const response = await api.getPosts(params)
+    const response = await api.getPosts(params);
     setPostData([...postData, ...response.data.data])
   }
 
