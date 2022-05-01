@@ -46,7 +46,7 @@ function CreatePost() {
 
   return (
     <MainContainer flex fd={'column'} jc={'center'} ai={'center'}>
-      <Container create fd={'column'} w={'80%'} h={'100%'} m={'20px 0 0 0'} of_y={'auto'} >
+      <Container create fd={'column'} w={'80%'} h={'100%'} m={'20px 0 0 0'} of_y={'auto'} mw={'1000px'}>
         <CreateTextArea
           ref={titleRef}
           onChange={changeTextArea}
@@ -61,7 +61,7 @@ function CreatePost() {
             textareaProps={{ height: '100%', placeholder: 'New Post Content here...' }} />
         </Container>
       </Container>
-      <Container postUD flex jc={'flex-end'} w={'80%'}>
+      <Container postUD flex jc={'flex-end'} w={'80%'} mw={'1000px'}>
         <CreatePostButton onClick={() => { navigate('/') }}>Discard</CreatePostButton>
         <CreatePostButton onClick={createPost}>Create</CreatePostButton>
       </Container>

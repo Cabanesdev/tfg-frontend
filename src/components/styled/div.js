@@ -28,6 +28,7 @@ const MainContainer = styled.div`
 const Container = styled.div`
   width: ${(props) => props.w};
   height: ${(props) => props.h};
+  max-width: ${(props) => props.mw};
   margin: ${(props) => props.m};
   padding: ${(props) => props.p};
   overflow-y: ${(props) => props.of_y};
@@ -77,6 +78,13 @@ const Container = styled.div`
         color: white;
         word-break: break-word;
         font-size: 0.8rem;
+      }
+    `}
+
+    ${({ modalContent }) =>
+    modalContent && css`
+      & > * {
+        color: white;
       }
     `}
 `
@@ -231,6 +239,26 @@ const CommentContainer = styled.div`
   }
 `
 
+const ModalContainer = styled.div`
+  position: absolute;
+  top: 0%;
+  width: 100%;
+  height: 100%;
+  background-color: #080707d9;
+`;
+
+const ModalCenterContainer = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 200px;
+  border: 1px solid black;
+  background-color: var(--secondary-color-1);
+`;
+
+
 export {
   MainContainer,
   Container,
@@ -245,4 +273,6 @@ export {
   PostView,
   MDEditorStyled,
   CommentContainer,
+  ModalContainer,
+  ModalCenterContainer
 };

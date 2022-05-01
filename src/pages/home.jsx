@@ -5,6 +5,8 @@ import infiniteScroll from '../utils/scroll';
 import Navbar from '../components/navbar';
 import Card from '../components/card';
 import Post from '../components/post';
+import Modal from '../components/modal';
+import LogOut from '../components/logOut';
 import {
   Container,
   MainContainer,
@@ -15,14 +17,15 @@ import {
 function Home() {
   const [postData, setPostData] = useState([])
   const [page, setPage] = useState(1)
+  const [showModal, setShowModal] = useState(false);
   const divRef = useRef()
 
   useEffect(() => {
     getPosts()
   }, [page])
 
- const getPosts = async () => {
-   const params = {page}
+  const getPosts = async () => {
+    const params = { page }
     const api = new Api()
     const response = await api.getPosts(params)
     setPostData([...postData, ...response.data.data])
@@ -32,7 +35,7 @@ function Home() {
   return (
     <MainContainer>
       <Container w={'100%'} h={'100%'} flex>
-        <Navbar />
+        <Navbar showModal={setShowModal} />
         <Container
           w={'100%'}
           h={'100%'}
@@ -52,6 +55,7 @@ function Home() {
           </PostsContainer>
         </Container>
       </Container>
+      {showModal ? <Modal><LogOut closeModal={setShowModal} /></Modal> : null}
     </MainContainer>
   );
 };
