@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import Api from '../utils/api'
-import { profileDateFormatter, usernameFormatter } from '../utils/formatters'
+import { profileDateFormatter, urlFormatter, usernameFormatter } from '../utils/formatters'
 import { deleteSession, getSession } from '../utils/localstorage';
 
 import Modal from '../components/modal';
@@ -18,7 +18,7 @@ import {
 } from '../components/styled/div';
 import { MainTitle, SecondaryTitle } from '../components/styled/title';
 import { EditButton, SectionButton } from '../components/styled/button';
-import { BsCalendar3 } from 'react-icons/bs';
+import { AiOutlineLink, AiFillGithub, AiFillLinkedin } from 'react-icons/ai';
 
 function User() {
   const [isPostActive, setIsPostActive] = useState(true);
@@ -123,18 +123,37 @@ function User() {
                     fs={'0.8rem'}>
                     {usernameFormatter(userData.username)}
                   </SecondaryTitle>
-                  <Container m={'30px 0 0 0'}>
+                  <Container>
                     {userData.biography ?
-                      <Container userData m={'10px 0 0 0'}>
+                      <Container userData m={'15px 0 0 0'}>
                         <p>{userData.biography}</p>
                       </Container>
                       : null
                     }
-                    <Container flex ai={'center'} userData >
-                      <Container flex ai={'center'} m={'0 5px 0 0'} >
-                        <BsCalendar3 style={{ color: 'var(--grey)' }} />
-                      </Container>
-                      <p>Joined {profileDateFormatter(userData.creationDate)}</p>
+                    <Container flex ai={'center'} userData m={'15px 0 0 0'}>
+                      {userData.webpage ? (
+                        <Container flex ai={'center'} m={'0 5px 0 0'} >
+                          <a href={userData.webpage} target='_blank'>
+                            <AiOutlineLink size={18} style={{ color: 'var(--grey)' }} />
+                          </a>
+                        </Container>
+                      ) : null}
+
+                      {userData.github ? (
+                        <Container flex ai={'center'} m={'0 5px 0 0'} >
+                          <a href={userData.github} target='_blank'>
+                            <AiFillGithub size={18} style={{ color: 'var(--grey)' }} />
+                          </a>
+                        </Container>
+                      ) : null}
+
+                      {userData.linkedin ? (
+                        <Container flex ai={'center'} m={'0 5px 0 0'} >
+                          <a href={userData.linkedin} target='_blank'>
+                            <AiFillLinkedin size={18} style={{ color: 'var(--grey)' }} />
+                          </a>
+                        </Container>
+                      ) : null}
                     </Container>
                   </Container>
                 </Container>

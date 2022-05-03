@@ -21,12 +21,17 @@ const CreateTextArea = styled(TextArea)`
 
 const CreateCommentTextArea = styled(TextArea)`
   width: 100%;
-  height: 80%;
   color: white;
   padding: 2px;
   background-color: var(--secondary-color);
 `
 
+const EditUserTextArea = styled(TextArea)`
+  width: 100%;
+  height: 80px;
+  color: white;
+  margin-top: 10px;
+  background: transparent;
+`
 
-
-export {CreateTextArea, CreateCommentTextArea}
+export {CreateTextArea, CreateCommentTextArea, EditUserTextArea}

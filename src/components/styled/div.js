@@ -2,28 +2,28 @@ import styled, { css } from 'styled-components';
 import MDEditor from '@uiw/react-md-editor';
 
 const flexOpt = (fd, jc, ai) => css`
-  display: flex;
-  flex-direction: ${fd};
-  justify-content: ${jc};
-  align-items: ${ai};
-`;
+    display: flex;
+    flex-direction: ${fd};
+    justify-content: ${jc};
+    align-items: ${ai};
+  `;
 
 const MainContainer = styled.div`
-  width: 100%;
-  height: 100%;
-  background-color: var(--secondary-color-1);
-  overflow: hidden;
+    width: 100%;
+    height: 100%;
+    background-color: var(--secondary-color-1);
+    overflow: hidden;
 
-  ${({ flex, fd, jc, ai }) => flex && flexOpt(fd, jc, ai)}
+    ${({ flex, fd, jc, ai }) => flex && flexOpt(fd, jc, ai)}
 
-  ${({ auth }) =>
+    ${({ auth }) =>
     auth &&
     css`
-      background: linear-gradient(0deg, var(--secondary-color), #1b4e4d);
-      background-size: 100% 100%;
-      animation: wave 30s ease infinite;
-    `}
-`;
+        background: linear-gradient(0deg, var(--secondary-color), #1b4e4d);
+        background-size: 100% 100%;
+        animation: wave 30s ease infinite;
+      `}
+  `;
 
 const Container = styled.div`
   width: ${(props) => props.w};
@@ -56,6 +56,18 @@ const Container = styled.div`
     css`
       border-top: 2px solid var(--secondary-color);
       border-bottom: 2px solid var(--secondary-color);
+    `}
+
+ ${({ bb }) =>
+    bb &&
+    css`
+      border-bottom: 2px solid var(--grey);
+    `}
+
+ ${({ bb }) =>
+    bb &&
+    css`
+      border-bottom: 2px solid var(--grey);
     `}
 
   ${({ create }) =>
@@ -270,8 +282,20 @@ const EditUserContainer = styled.div`
   border-radius: 10px;
   background-color: var(--secondary-color-1);
   padding:10px;
-
 `;
+
+const EditInputContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  padding: 5px;
+  border: 2px solid var(--secondary-color);
+
+  & > span {
+    color: var(--white);
+  }
+
+`
 
 
 export {
@@ -290,5 +314,6 @@ export {
   CommentContainer,
   ModalContainer,
   ModalCenterContainer,
-  EditUserContainer
+  EditUserContainer,
+  EditInputContainer
 };
