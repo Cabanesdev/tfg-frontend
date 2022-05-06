@@ -21,6 +21,7 @@ const CreateTextArea = styled(TextArea)`
 
 const CreateCommentTextArea = styled(TextArea)`
   width: 100%;
+  height: 80%;
   color: white;
   padding: 2px;
   background-color: var(--secondary-color);
