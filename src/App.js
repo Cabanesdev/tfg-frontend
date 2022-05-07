@@ -4,6 +4,7 @@ import Home from './pages/home';
 import User from './pages/user';
 import ViewPost from './pages/post/view';
 import CreatePost from './pages/post/create';
+import EditPost from './pages/post/edit';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Route path="/profile" element={<User />} />
       <Route path="/user/:id" element={<User />} />
       <Route path="/post/new" element={<CreatePost />} />
+      <Route path="/post/edit/:id" element={<EditPost/>} />
       <Route path="/post/:id" element={<ViewPost />} />
     </Routes>
   );

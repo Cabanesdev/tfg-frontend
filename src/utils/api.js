@@ -30,9 +30,9 @@ export default class Api {
 
   getUserById = (id) => this.init().get(`/user/${id}`);
 
-  updateUser= (data) => this.init().put('/user/', data);
+  updateUser = (data) => this.init().put('/user/', data);
 
-  getPosts = (params) =>  {
+  getPosts = (params) => {
     const parsedParams = qs.stringify(params)
     return this.init().get(`/post?${parsedParams}`);
   }
@@ -40,6 +40,8 @@ export default class Api {
   getPostById = (id) => this.init().get(`/post/${id}`);
 
   createPost = (data) => this.init().post('/post', data);
+
+  editPost = (id, data) => this.init().put(`/post/${id}`, data);
 
   getComments = (params) => {
     const parsedParams = qs.stringify(params)
