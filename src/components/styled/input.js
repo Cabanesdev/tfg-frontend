@@ -14,7 +14,6 @@ const AuthInput = styled.input`
 
 const EditInput = styled.input`
   width: 100%;
-  max-width: 300px;
   height: 20px;
   border: none;
   background-color: transparent;
