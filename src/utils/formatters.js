@@ -41,4 +41,8 @@ const profileDateFormatter = (date) => {
   return `${month} ${year}`
 }
 
-export { usernameFormatter, dateFormatter, datePostFormatter, profileDateFormatter }
+const urlFormatter = (url) => {
+  return url.replace(/(?:https?|ftp):\/\//,'');
+}
+
+export { usernameFormatter, dateFormatter, datePostFormatter, profileDateFormatter, urlFormatter }

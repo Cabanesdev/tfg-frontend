@@ -113,4 +113,15 @@ const ModalButton = styled.button`
     cursor: pointer;
   }
 `
-export { AuthButton, AuthFormButton, CreatePostButton, CreateCommentButton, EditButton, SectionButton, ModalButton };
+
+const EditProfileButton = styled.button`
+  width: 70px;
+  height: 25px;
+  border: 1px solid var(--white);
+  border-radius: 20px;
+  background: transparent;
+  color: var(--white);
+  cursor: pointer;
+`
+
+export { AuthButton, AuthFormButton, CreatePostButton, CreateCommentButton, EditButton, SectionButton, ModalButton, EditProfileButton };
