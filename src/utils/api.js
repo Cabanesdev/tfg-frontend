@@ -43,13 +43,14 @@ export default class Api {
 
   editPost = (id, data) => this.init().put(`/post/${id}`, data);
 
+  deletePost = (id) => this.init().delete(`/post/${id}`);
+
   getComments = (params) => {
     const parsedParams = qs.stringify(params)
     return this.init().get(`/comment?${parsedParams}`);
   }
 
   createComment = (data) => this.init().post('/comment', data);
-
 
 }
 
