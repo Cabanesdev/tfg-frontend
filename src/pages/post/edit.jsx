@@ -23,16 +23,21 @@ function EditPost() {
     getPostData()
   }, [])
 
+
+  const getPostData = async () => {
+    const { data: { data: userData } } = await api.getSession()
+    const { data: { data: postData } } = await api.getPostById(id);
+
+    if (userData._id !== postData.userId) navigate('/')
+
+    setTitle(postData.title);
+    setContent(postData.content);
+  }
+
   const changeTextArea = () => {
     titleRef.current.style.height = 'auto';
     titleRef.current.style.height = `${titleRef.current.scrollHeight}px`;
   };
-
-  const getPostData = async () => {
-    const { data: { data } } = await api.getPostById(id);
-    setTitle(data.title);
-    setContent(data.content);
-  }
 
   const editPost = async () => {
     try {
@@ -40,7 +45,6 @@ function EditPost() {
         title: titleRef.current.value,
         content
       }
-
 
       await api.editPost(id, data)
       toast.success('Post Edited Succesfully', {
@@ -56,7 +60,6 @@ function EditPost() {
         pauseOnHover: false,
       })
     }
-
   }
 
   return (
@@ -78,13 +81,12 @@ function EditPost() {
         </Container>
       </Container>
       <Container postUD flex jc={'flex-end'} w={'80%'} mw={'1000px'}>
-        <CreatePostButton onClick={() => { navigate('/') }}>Discard</CreatePostButton>
+        <CreatePostButton onClick={() => { navigate(-1) }}>Discard</CreatePostButton>
         <CreatePostButton onClick={editPost}>Edit</CreatePostButton>
       </Container>
       <ToastContainer theme="dark" />
     </MainContainer>
   )
-
 }
 
 export default EditPost

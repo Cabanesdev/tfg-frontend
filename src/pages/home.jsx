@@ -31,7 +31,6 @@ function Home() {
     setPostData([...postData, ...response.data.data])
   }
 
-
   return (
     <MainContainer>
       <Container w={'100%'} h={'100%'} flex>
