@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -7,6 +7,8 @@ import { CgProfile } from 'react-icons/cg'
 
 import Api from "../../utils/api";
 import { datePostFormatter } from "../../utils/formatters";
+import infiniteScroll from '../../utils/scroll';
+
 import Navbar from "../../components/navbar"
 import CreateComment from "../../components/createComment"
 import ViewComment from "../../components/viewComment"
@@ -17,7 +19,8 @@ import DeletePost from '../../components/deletePost';
 import { Container, MainContainer, PostView } from "../../components/styled/div"
 import { FifthlyTitle, ForthlyTitle, MainTitle, ThirdlyTitle } from "../../components/styled/title"
 import { getSession } from "../../utils/localstorage";
-import { BsPencil, BsTrash, BsTree } from "react-icons/bs";
+import { BsPencil, BsTrash } from "react-icons/bs";
+
 
 function ViewPost() {
   const [postData, setPostData] = useState({})
@@ -26,15 +29,15 @@ function ViewPost() {
   const [commentsData, setCommentsData] = useState([])
   const [showModal, setShowModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-
   const [page, setPage] = useState(1)
+  const divRef = useRef({})
   const navigate = useNavigate()
   const { id } = useParams();
   const api = new Api()
 
   useEffect(() => {
     getPost();
-  }, [id])
+  }, [id, page])
 
   const getPost = async () => {
     const response = await api.getPostById(id)
@@ -62,7 +65,7 @@ function ViewPost() {
   const getComments = async (postId) => {
     const params = { postId, page }
     const response = await api.getComments(params)
-    setCommentsData(response.data.data)
+    setCommentsData([...commentsData, ...response.data.data])
   }
 
   const deletePost = async () => {
@@ -80,7 +83,12 @@ function ViewPost() {
   return (
     <MainContainer flex>
       <Navbar showModal={setShowModal} />
-      <Container flex w={'100%'} of_y={'auto'}>
+      <Container
+        ref={divRef}
+        flex w={'100%'}
+        of_y={'auto'}
+        onScroll={() => infiniteScroll(divRef, page, setPage) }
+      >
         <PostView>
           <Container postUD flex ai={'center'}>
             <CgProfile size={25} />
