@@ -24,7 +24,6 @@ function CreateComment({ postId, getPost }) {
       const api = new Api()
       await api.createComment(data);
       getPost()
-      // setValue('')
       textAreaRef.current.value = ''
 
     } catch (err) {

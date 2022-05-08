@@ -37,7 +37,12 @@ function ViewPost() {
 
   useEffect(() => {
     getPost();
-  }, [id, page])
+  }, [id])
+
+  useEffect(() => {
+    if (page > 1)
+      refreshComments(postData._id, page)
+  }, [page])
 
   const getPost = async () => {
     const response = await api.getPostById(id)
@@ -48,7 +53,7 @@ function ViewPost() {
 
     if (response.data.data.comments > 0)
       getComments(response.data.data._id)
-
+      setPage(1);
   }
 
   const getUserData = async (userId) => {
@@ -63,6 +68,12 @@ function ViewPost() {
   }
 
   const getComments = async (postId) => {
+    const params = { postId, page: 1 }
+    const response = await api.getComments(params)
+    setCommentsData(response.data.data)
+  }
+
+  const refreshComments = async (postId) => {
     const params = { postId, page }
     const response = await api.getComments(params)
     setCommentsData([...commentsData, ...response.data.data])
@@ -87,7 +98,7 @@ function ViewPost() {
         ref={divRef}
         flex w={'100%'}
         of_y={'auto'}
-        onScroll={() => infiniteScroll(divRef, page, setPage) }
+        onScroll={() => infiniteScroll(divRef, page, setPage)}
       >
         <PostView>
           <Container postUD flex ai={'center'}>
