@@ -1,25 +1,36 @@
-import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom"
+import { useEffect, useRef, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import ReactMarkDown from "react-markdown"
 import { CgProfile } from 'react-icons/cg'
+
 import Api from "../../utils/api";
 import { datePostFormatter } from "../../utils/formatters";
+import infiniteScroll from '../../utils/scroll';
+
 import Navbar from "../../components/navbar"
 import CreateComment from "../../components/createComment"
 import ViewComment from "../../components/viewComment"
 import Modal from '../../components/modal';
 import LogOut from '../../components/logOut';
+import DeletePost from '../../components/deletePost';
 
-import { Container, MainContainer, PostView, CommentContainer } from "../../components/styled/div"
+import { Container, MainContainer, PostView } from "../../components/styled/div"
 import { FifthlyTitle, ForthlyTitle, MainTitle, ThirdlyTitle } from "../../components/styled/title"
+import { getSession } from "../../utils/localstorage";
+import { BsPencil, BsTrash } from "react-icons/bs";
+
 
 function ViewPost() {
   const [postData, setPostData] = useState({})
+  const [userData, setUserData] = useState({})
+  const [isOwner, setIsOwner] = useState(false);
   const [commentsData, setCommentsData] = useState([])
   const [showModal, setShowModal] = useState(false);
-
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [page, setPage] = useState(1)
-  const [userData, setUserData] = useState({})
+  const divRef = useRef({})
   const navigate = useNavigate()
   const { id } = useParams();
   const api = new Api()
@@ -28,31 +39,67 @@ function ViewPost() {
     getPost();
   }, [id])
 
+  useEffect(() => {
+    if (page > 1)
+      refreshComments(postData._id, page)
+  }, [page])
+
   const getPost = async () => {
     const response = await api.getPostById(id)
     if (!response.data.data) return navigate('/')
+
     setPostData(response.data.data)
     getUserData(response.data.data.userId)
-    if (response.data.data.comments > 0) {
+
+    if (response.data.data.comments > 0)
       getComments(response.data.data._id)
-    }
+      setPage(1);
   }
 
   const getUserData = async (userId) => {
-    const response = await api.getUserById(userId)
-    setUserData(response.data.data)
+    const { data: { data } } = await api.getUserById(userId)
+    setUserData(data);
+
+    const token = getSession()
+    if (token) {
+      const { data: { data: sessionData } } = await api.getSession(userId)
+      if (sessionData._id === data._id) setIsOwner(true);
+    }
   }
 
   const getComments = async (postId) => {
-    const params = { postId, page }
+    const params = { postId, page: 1 }
     const response = await api.getComments(params)
     setCommentsData(response.data.data)
   }
 
+  const refreshComments = async (postId) => {
+    const params = { postId, page }
+    const response = await api.getComments(params)
+    setCommentsData([...commentsData, ...response.data.data])
+  }
+
+  const deletePost = async () => {
+    try {
+      await api.deletePost(postData._id);
+      navigate('/home');
+    } catch (err) {
+      if (err.response) toast.error(err.response.data.data, {
+        autoClose: 2000,
+        pauseOnHover: false,
+      })
+    }
+  }
+
   return (
     <MainContainer flex>
-      <Navbar showModal={setShowModal}/>
-      <Container flex w={'100%'} of_y={'auto'}>
+      <Navbar showModal={setShowModal} />
+      <Container
+        ref={divRef}
+        flex w={'100%'}
+        of_y={'auto'}
+        onScroll={() => infiniteScroll(divRef, page, setPage)}
+      >
         <PostView>
           <Container postUD flex ai={'center'}>
             <CgProfile size={25} />
@@ -61,7 +108,22 @@ function ViewPost() {
               <FifthlyTitle>Posted on {datePostFormatter(postData.creationDate)}</FifthlyTitle>
             </Container>
           </Container>
-          <MainTitle fs={'36px'} m={'15px 0 0 0'}> {postData.title} </MainTitle>
+          <Container flex jc={'space-between'} ai={'center'} m={'15px 0 0 0'}>
+            <MainTitle fs={'36px'}> {postData.title} </MainTitle>
+            {isOwner ?
+              <Container flex jc={'space-between'} w={'50px'} >
+                <Link to={`/post/edit/${postData._id}`}>
+                  <BsPencil size={20} />
+                </Link>
+                <BsTrash
+                  size={20}
+                  onClick={() => {
+                    setShowModal(true)
+                    setShowDeleteModal(true)
+                  }} />
+              </Container>
+              : null}
+          </Container>
           <hr />
           <Container m={'20px 0 0 0'}>
             <ReactMarkDown>{postData.content}</ReactMarkDown>
@@ -80,9 +142,20 @@ function ViewPost() {
               ) : null}
           </Container>
         </PostView>
-      </Container>
-      {showModal ? <Modal><LogOut closeModal={setShowModal} /></Modal> : null}
-    </MainContainer>
+      </Container >
+      {showModal ?
+        <Modal>
+          {showDeleteModal ?
+            <DeletePost
+              closeModal={setShowModal}
+              showDelete={setShowDeleteModal}
+              deletePost={deletePost}
+            />
+            : <LogOut closeModal={setShowModal} />}
+        </Modal >
+        : null}
+      <ToastContainer theme="dark" />
+    </MainContainer >
   )
 }
 
