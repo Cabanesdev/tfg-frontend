@@ -64,10 +64,10 @@ const Container = styled.div`
       border-bottom: 2px solid var(--grey);
     `}
 
- ${({ bb }) =>
-    bb &&
+ ${({ types }) =>
+    types &&
     css`
-      border-bottom: 2px solid var(--grey);
+      border-bottom: 2px solid var(--secondary-color);
     `}
 
   ${({ create }) =>
@@ -294,9 +294,17 @@ const EditInputContainer = styled.div`
   & > span {
     color: var(--white);
   }
-
 `
 
+const SearchContainer = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 500px;
+  padding: 5px;
+  border-radius: 20px;
+  background-color: var(--secondary-color);
+`
 
 export {
   MainContainer,
@@ -315,5 +323,6 @@ export {
   ModalContainer,
   ModalCenterContainer,
   EditUserContainer,
-  EditInputContainer
+  EditInputContainer,
+  SearchContainer
 };

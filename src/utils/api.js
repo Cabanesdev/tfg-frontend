@@ -28,6 +28,12 @@ export default class Api {
 
   getSession = () => this.init().get(`/user/session`);
 
+
+  getUsers = (params) => {
+    const parsedParams = qs.stringify(params)
+    return this.init().get(`/user?${parsedParams}`);
+  }
+
   getUserById = (id) => this.init().get(`/user/${id}`);
 
   updateUser = (data) => this.init().put('/user/', data);
