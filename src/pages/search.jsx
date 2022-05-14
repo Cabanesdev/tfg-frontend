@@ -3,8 +3,8 @@ import { VscSearch } from 'react-icons/vsc'
 import Navbar from '../components/navbar';
 import Card from '../components/card';
 import Post from '../components/post';
-import { Container, MainContainer, SearchContainer, PostsContainer } from '../components/styled/div';
-
+import UserCard from '../components/userCard';
+import { Container, MainContainer, SearchContainer } from '../components/styled/div';
 import { SearchInput } from '../components/styled/input';
 import { SectionButton } from '../components/styled/button';
 import Api from '../utils/api';
@@ -116,7 +116,11 @@ function Search() {
             >
               {data.map((data) =>
                 <Card key={data._id}>
-                  <Post data={data} />
+                  {
+                    isPostsActive ?
+                      <Post data={data} />
+                      : <UserCard data={data} />
+                  }
                 </Card>
               )}
             </Container>
