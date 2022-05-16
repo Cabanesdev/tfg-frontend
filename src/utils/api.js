@@ -58,5 +58,11 @@ export default class Api {
 
   createComment = (data) => this.init().post('/comment', data);
 
+  createCommit = (data) => this.init().post('/commit', data);
+
+  getCommits = (params) => {
+    const parsedParams = qs.stringify(params)
+    return this.init().get(`/commit?${parsedParams}`);
+  }
 }
 

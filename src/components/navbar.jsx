@@ -14,19 +14,13 @@ import {
   NavbarContainer,
 } from './styled/div';
 
-function Navbar({ showModal }) {
+function Navbar({ showModal, isHomePage, isPostsActive, setIsPostsActive }) {
   const [userData, setUserData] = useState(null)
-  const [isHomePage, setIsHomePage] = useState(false);
-  const [isPostActive, setIsPostActive] = useState(true);
-  const location = useLocation();
 
   useEffect(() => {
     const token = getSession()
     if (token) getUserSession()
-    if (location.pathname === '/' || location.pathname === '/home')
-      setIsHomePage(true);
   }, [])
-
 
   const getUserSession = async () => {
     try {
@@ -51,8 +45,16 @@ function Navbar({ showModal }) {
         </Link>
         {isHomePage ? (
           <>
-            <BsFilePost size={25} style={{ color: isPostActive ? 'var(--primary-color)' : 'white', cursor: 'pointer' }} />
-            <BiGitCommit size={30} style={{ color: isPostActive ? 'white' : 'var(--primary-color)', cursor: 'pointer' }} />
+            <BsFilePost
+              size={25}
+              style={{ color: isPostsActive ? 'var(--primary-color)' : 'white', cursor: 'pointer' }}
+              onClick={() => setIsPostsActive(true)}
+            />
+            <BiGitCommit
+              size={30}
+              style={{ color: isPostsActive ? 'white' : 'var(--primary-color)', cursor: 'pointer' }}
+              onClick={() => setIsPostsActive(false)}
+            />
           </>
         ) : null}
         {userData ? (

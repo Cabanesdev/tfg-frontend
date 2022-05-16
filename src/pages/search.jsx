@@ -46,7 +46,6 @@ function Search() {
         return;
       }
       const response = await api.getUsers(params)
-      console.log(response.data.data)
       setData(response.data.data);
       setPage(1)
     }

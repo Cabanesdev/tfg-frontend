@@ -84,6 +84,12 @@ const Container = styled.div`
       border-radius: 5px;
   `}
 
+  ${({ createCommit }) =>
+    createCommit && css`
+      width: 95%;
+      border-bottom: 2px solid var(--secondary-color);
+  `}
+
     ${({ userData }) =>
     userData && css`
       & > * {
