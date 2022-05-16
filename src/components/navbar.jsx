@@ -51,8 +51,8 @@ function Navbar({ showModal }) {
         </Link>
         {isHomePage ? (
           <>
-            <BsFilePost size={25} style={{ color: isPostActive ? 'var(--primary-color)' : 'white' }} />
-            <BiGitCommit size={30} style={{ color: isPostActive ? 'white' : 'var(--primary-color)' }} />
+            <BsFilePost size={25} style={{ color: isPostActive ? 'var(--primary-color)' : 'white', cursor: 'pointer' }} />
+            <BiGitCommit size={30} style={{ color: isPostActive ? 'white' : 'var(--primary-color)', cursor: 'pointer' }} />
           </>
         ) : null}
         {userData ? (
@@ -62,7 +62,7 @@ function Navbar({ showModal }) {
             </Link>
             <FiLogOut
               size={30}
-              style={{ color: 'white' }}
+              style={{ color: 'white', cursor: 'pointer' }}
               onClick={() => showModal(true)}
             />
             <Link to='/post/new'>
@@ -71,7 +71,7 @@ function Navbar({ showModal }) {
           </>
         ) : (
           <Link to='/auth'>
-            <FiLogIn size={30} style={{ color: 'white' }} />
+            <FiLogIn size={30} style={{ color: 'white', cursor: 'pointer' }} />
           </Link>
         )}
       </NavbarActionsContainer>
