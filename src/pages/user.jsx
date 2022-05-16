@@ -22,9 +22,9 @@ import { AiOutlineLink, AiFillGithub, AiFillLinkedin } from 'react-icons/ai';
 
 function User() {
   const [isPostActive, setIsPostActive] = useState(true);
+  const [isCommitActived, setIsCommitActive] = useState(false);
   const [editUserModal, setEditUserModal] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [isCommitActived, setIsCommitActive] = useState(false);
   const [postData, setPostData] = useState([]);
   const [page, setPage] = useState(1);
   const [userData, setUserData] = useState({});

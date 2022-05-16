@@ -46,7 +46,7 @@ function Navbar({ showModal }) {
         </Link>
       </LogoContainer>
       <NavbarActionsContainer>
-        <Link to='/'>
+        <Link to='/search'>
           <BiSearch size={25} />
         </Link>
         {isHomePage ? (

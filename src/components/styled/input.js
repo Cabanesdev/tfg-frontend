@@ -23,8 +23,19 @@ const EditInput = styled.input`
   &:focus {
     outline:none;
   }
-
- 
 `
 
-export { AuthInput, EditInput }
+const SearchInput = styled.input`
+  width: 100%;
+  height: 25px;
+  border: none;
+  padding-left: 5px;
+  background: transparent;
+  color: white;
+
+  &:focus {
+    outline:none;
+  }
+`
+
+export { AuthInput, EditInput, SearchInput }
