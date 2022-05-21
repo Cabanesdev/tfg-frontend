@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
+import { BiGitCommit } from 'react-icons/bi'
 import { CgProfile } from 'react-icons/cg'
-import { FaRegComment } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import Api from '../utils/api.js'
 import { dateFormatter, dateTimeFormatter, usernameFormatter } from '../utils/formatters.js'
@@ -46,7 +46,7 @@ function Commit({ data }) {
         </Link>
         <Container flex jc={'space-between'} m={'10px 0 0 0'} >
           <Container postUD flex ai={'center'} >
-            <FaRegComment size={15} />
+            <BiGitCommit size={25} />
             {data.commitNumber}
           </Container>
         </Container>

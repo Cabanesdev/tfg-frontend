@@ -53,7 +53,6 @@ function CreateCommit({ commitId, getData }) {
             Create
           </CreateCommentButton>
         }
-
       </Container>
     </Container>
   )
