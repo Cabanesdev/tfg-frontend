@@ -38,6 +38,11 @@ function ViewCommit() {
     getCommit();
   }, [id])
 
+  useEffect(() => {
+    if (page > 1)
+      updateSubcommits();
+  }, [page])
+
   const getCommit = async () => {
     const response = await api.getOneCommit(id)
     setCommitData(response.data.data)
@@ -48,7 +53,6 @@ function ViewCommit() {
     } else {
       setSubCommits([])
     }
-
   }
 
   const getUserData = async (userId) => {
@@ -74,6 +78,15 @@ function ViewCommit() {
     }
     const response = await api.getCommits(params)
     setSubCommits(response.data.data);
+  }
+
+  const updateSubcommits = async () => {
+    const params = {
+      commitId: commitData._id,
+      page
+    }
+    const response = await api.getCommits(params)
+    setSubCommits([...subCommits, ...response.data.data]);
   }
 
   const deleteCommit = async () => {
@@ -116,8 +129,12 @@ function ViewCommit() {
             <Container>
               <p>{commitData.content}</p>
             </Container>
-            <Container m={'30px 0 15px 0'}>
+            <Container flex jc={'space-between'} m={'30px 0 15px 0'}>
               <FifthlyTitle>{commitData.creationDate}</FifthlyTitle>
+              {commitData.commitId ?
+                <p>Reply from <Link to={`/commit/${commitData.commitId}`}>{commitData.commitId}</Link></p>
+                : null
+              }
             </Container>
             <hr color="#121927" />
             <Container flex jc={'space-between'} m={'10px 0 15px 0'} >
