@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
 import { toast } from 'react-toastify';
+import { sha256 } from 'js-sha256';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import { MainTitle } from './styled/title';
 import { AuthFormContainer, AuthInputContainer } from './styled/div';
@@ -30,7 +31,7 @@ function Register({ setShowLogin }) {
       name: nameRef.current.value,
       email: emailRef.current.value,
       username: usernameRef.current.value,
-      password: passwordRef.current.value,
+      password: sha256(passwordRef.current.value)
     };
 
     registerUser(data);
