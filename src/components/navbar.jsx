@@ -15,7 +15,7 @@ import {
 } from './styled/div';
 
 function Navbar({ showModal, isHomePage, isPostsActive, setIsPostsActive }) {
-  const [userData, setUserData] = useState(null)
+  const [userData, setUserData] = useState({})
 
   useEffect(() => {
     const token = getSession()
@@ -57,9 +57,9 @@ function Navbar({ showModal, isHomePage, isPostsActive, setIsPostsActive }) {
             />
           </>
         ) : null}
-        {userData ? (
+        {userData._id ? (
           <>
-            <Link to={`/profile`}>
+            <Link to={`/user/${userData._id}`}>
               <BiUser size={30} />
             </Link>
             <FiLogOut

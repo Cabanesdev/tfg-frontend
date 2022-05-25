@@ -1,15 +1,17 @@
-import { useEffect, useState } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useEffect, useRef,  useState } from 'react';
+import {  useNavigate, useParams } from 'react-router-dom';
 
 import Api from '../utils/api'
-import { profileDateFormatter, urlFormatter, usernameFormatter } from '../utils/formatters'
-import { deleteSession, getSession } from '../utils/localstorage';
+import infiniteScroll from '../utils/scroll';
+import { usernameFormatter } from '../utils/formatters'
 
 import Modal from '../components/modal';
 import LogOut from '../components/logOut';
 import Navbar from '../components/navbar';
 import Card from '../components/card';
 import Post from '../components/post';
+import Commit from '../components/commit';
+
 import EditUser from '../components/editUser';
 
 import {
@@ -21,78 +23,78 @@ import { EditButton, SectionButton } from '../components/styled/button';
 import { AiOutlineLink, AiFillGithub, AiFillLinkedin } from 'react-icons/ai';
 
 function User() {
-  const [isPostActive, setIsPostActive] = useState(true);
-  const [isCommitActived, setIsCommitActive] = useState(false);
+  const [isCommitActived, setIsCommitActive] = useState(true);
   const [editUserModal, setEditUserModal] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [postData, setPostData] = useState([]);
+  const [userSession, setUserSession] = useState(false);
   const [page, setPage] = useState(1);
   const [userData, setUserData] = useState({});
-  const navigate = useNavigate();
-  const location = useLocation();
   const { id } = useParams();
+  const divRef = useRef({})
   const api = new Api();
 
   useEffect(() => {
-    if (location.pathname === '/profile') {
-      getUserSession();
-    } else {
-      const token = getSession();
-      if (token)
-        checkIfUserIsSession();
-      getUserData();
-    }
-  }, [])
+    getUserData();
+  }, [id])
 
-  const getUserSession = async () => {
-    try {
-      const response = await api.getSession();
-      setUserData(response.data.data);
-      getPostData(response.data.data._id);
-    } catch (err) {
-      if (err.response.status === 401) {
-        deleteSession();
-        navigate('/auth');
-      }
-    }
-  }
+  useEffect(() => {
+    getPostData();
+  }, [isCommitActived])
+
+  useEffect(() => {
+    if (page > 1)
+      updateData(id);
+  }, [page])
+
 
   const getUserData = async () => {
     const response = await api.getUserById(id);
     setUserData(response.data.data);
-    getPostData(response.data.data._id);
+    getUserSession(id)
   }
 
-
-  const checkIfUserIsSession = async () => {
-    const response = await api.getSession();
-    if (response.data.data._id === id) navigate('/profile');
+  const getUserSession = async (userDataId) => {
+    try {
+      const response = await api.getSession();
+      if (response.data.data._id === userDataId)
+        setUserSession(true);
+    } catch (err) { }
   }
 
   const getPostData = async (userId) => {
-    const params = {
-      userId,
-      page
-    };
+    const params = { userId, page: 1 };
+    let response
+    if (isCommitActived) {
+      response = await api.getCommits(params);
+    } else {
+      response = await api.getPosts(params);
+    }
+    setPostData(response.data.data);
+    setPage(1);
+  }
 
-    const response = await api.getPosts(params);
-    setPostData([...postData, ...response.data.data])
+  const updateData = async (userId) => {
+    const params = { userId, page };
+    let response
+    if (isCommitActived) {
+      response = await api.getCommits(params);
+    } else {
+      response = await api.getPosts(params);
+    }
+    setPostData([...postData, ...response.data.data]);
   }
 
 
+  const handleClickCommitSection = () => {
+    if (!isCommitActived) {
+      setIsCommitActive(true);
+    }
+  }
+
   const handleClickPostSection = () => {
     if (isCommitActived) {
-      setPage(1);
       setIsCommitActive(false);
-      setIsPostActive(true);
-    }
-  };
-
-  const handleClickCommitSection = () => {
-    if (isPostActive) {
-      setPage(1);
-      setIsPostActive(false);
-      setIsCommitActive(true);
     }
   };
 
@@ -101,9 +103,11 @@ function User() {
       <Container w={'100%'} h={'100%'} flex>
         <Navbar showModal={setShowModal} />
         <Container
+          ref={divRef}
           w={'100%'}
           h={'100%'}
           of_y={'auto'}
+          onScroll={() => infiniteScroll(divRef, page, setPage)}
         >
           <Container
             w={'80%'}
@@ -157,7 +161,7 @@ function User() {
                     </Container>
                   </Container>
                 </Container>
-                {location.pathname === '/profile' ?
+                {userSession ?
                   (
                     <Container flex jc={'flex-end'}>
                       <EditButton onClick={() => setEditUserModal(true)} >Edit</EditButton>
@@ -172,7 +176,7 @@ function User() {
                   Commits
                 </SectionButton>
                 <SectionButton
-                  active={isPostActive}
+                  active={!isCommitActived}
                   onClick={handleClickPostSection}
                 >
                   Posts
@@ -182,7 +186,11 @@ function User() {
             <Container>
               {postData.map((data) =>
                 <Card key={data._id}>
-                  <Post data={data} />
+                  {
+                    isCommitActived ?
+                      <Commit data={data} />
+                      : <Post data={data} />
+                  }
                 </Card>
               )}
             </Container>

@@ -16,7 +16,7 @@ import { FifthlyTitle, ForthlyTitle } from "../components/styled/title"
 import { CgProfile } from "react-icons/cg";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { BiGitCommit } from "react-icons/bi";
-import { usernameFormatter } from "../utils/formatters";
+import { usernameFormatter, dateTimeFormatter } from "../utils/formatters";
 import CreateCommit from "../components/createCommit";
 import { BsTrash } from "react-icons/bs";
 import { getSession } from "../utils/localstorage";
@@ -25,6 +25,7 @@ function ViewCommit() {
   const [page, setPage] = useState(1)
   const [commitData, setCommitData] = useState({})
   const [userData, setUserData] = useState({})
+  const [userDataReply, setUserDataReply] = useState({})
   const [userSession, setUserSession] = useState(false);
   const [subCommits, setSubCommits] = useState([])
   const [showModal, setShowModal] = useState(false);
@@ -48,6 +49,7 @@ function ViewCommit() {
     setCommitData(response.data.data)
     getUserData(response.data.data.userId)
     setPage(1);
+    if (response.data.data.commitId) getUserDataReply(response.data.data.commitId)
     if (response.data.data.commitNumber > 0) {
       getSubCommits(response.data.data._id, 1);
     } else {
@@ -61,6 +63,12 @@ function ViewCommit() {
     const token = getSession()
     if (token)
       getUserSession(response.data.data._id)
+  }
+
+  const getUserDataReply = async (commitId) => {
+    const { data: { data: commitResponse } } = await api.getOneCommit(commitId)
+    const { data: { data: userResponse } } = await api.getUserById(commitResponse.userId)
+    setUserDataReply(userResponse);
   }
 
   const getUserSession = async (userDataId) => {
@@ -99,7 +107,7 @@ function ViewCommit() {
 
   return (
     <MainContainer flex>
-      <Navbar />
+      <Navbar showModal={setShowModal} />
       <Container
         ref={divRef}
         flex w={'100%'}
@@ -124,15 +132,14 @@ function ViewCommit() {
                   <BsTrash size={20} style={{ cursor: 'pointer' }} onClick={deleteCommit} />
                   : null
               }
-
             </Container>
             <Container>
               <p>{commitData.content}</p>
             </Container>
             <Container flex jc={'space-between'} m={'30px 0 15px 0'}>
-              <FifthlyTitle>{commitData.creationDate}</FifthlyTitle>
+              <FifthlyTitle>{dateTimeFormatter(commitData.creationDate)}</FifthlyTitle>
               {commitData.commitId ?
-                <p>Reply from <Link to={`/commit/${commitData.commitId}`}>{commitData.commitId}</Link></p>
+                <p>Reply from <Link to={`/commit/${commitData.commitId}`}>{usernameFormatter(userDataReply.username)}</Link></p>
                 : null
               }
             </Container>
@@ -155,6 +162,7 @@ function ViewCommit() {
           </Container>
         </PostView>
       </Container>
+      {showModal ? <Modal><LogOut closeModal={setShowModal} /></Modal> : null}
     </MainContainer >
   )
 }
