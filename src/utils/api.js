@@ -5,7 +5,7 @@ import { getSession } from './localstorage';
 
 export default class Api {
   constructor() {
-    this.api_url = 'http://localhost:3000';
+    this.api_url = 'http://api.cabanesdev.tk';
     const token = getSession();
 
     if (token) {
