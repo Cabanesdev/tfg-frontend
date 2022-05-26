@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { sha256 } from 'js-sha256';
 import { MainTitle } from './styled/title';
 import { AuthFormContainer, AuthInputContainer } from './styled/div';
 import { AuthInput } from './styled/input';
@@ -19,7 +20,7 @@ function LoginForm({ setShowLogin }) {
   const handleButtonOnClick = () => {
     const data = {
       username: usernameRef.current.value,
-      password: passwordRef.current.value,
+      password: sha256(passwordRef.current.value),
     };
 
     loginUser(data);

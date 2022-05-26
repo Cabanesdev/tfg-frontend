@@ -53,7 +53,7 @@ function ViewPost() {
 
     if (response.data.data.comments > 0)
       getComments(response.data.data._id)
-      setPage(1);
+    setPage(1);
   }
 
   const getUserData = async (userId) => {
@@ -104,8 +104,10 @@ function ViewPost() {
           <Container postUD flex ai={'center'}>
             <CgProfile size={25} />
             <Container postUD >
-              <ForthlyTitle>{userData.name}</ForthlyTitle>
-              <FifthlyTitle>Posted on {datePostFormatter(postData.creationDate)}</FifthlyTitle>
+              <Link to={`/user/${userData._id}`}>
+                <ForthlyTitle>{userData.name}</ForthlyTitle>
+                <FifthlyTitle>Posted on {datePostFormatter(postData.creationDate)}</FifthlyTitle>
+              </Link>
             </Container>
           </Container>
           <Container flex jc={'space-between'} ai={'center'} m={'15px 0 0 0'}>
