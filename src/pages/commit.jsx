@@ -100,7 +100,8 @@ function ViewCommit() {
   const deleteCommit = async () => {
     try {
       await api.deleteCommits(commitData._id);
-      navigate('/home');
+      const navigateRouting = commitData.commitId ? `/commit/${commitData.commitId}` : '/home'
+      navigate(navigateRouting);
     } catch (err) { }
 
   }
