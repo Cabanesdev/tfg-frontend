@@ -45,15 +45,21 @@ function ViewCommit() {
   }, [page])
 
   const getCommit = async () => {
-    const response = await api.getOneCommit(id)
-    setCommitData(response.data.data)
-    getUserData(response.data.data.userId)
-    setPage(1);
-    if (response.data.data.commitId) getUserDataReply(response.data.data.commitId)
-    if (response.data.data.commitNumber > 0) {
-      getSubCommits(response.data.data._id, 1);
-    } else {
-      setSubCommits([])
+    try {
+      const response = await api.getOneCommit(id)
+      setCommitData(response.data.data)
+      getUserData(response.data.data.userId)
+      setPage(1);
+
+      if (response.data.data.commitId) getUserDataReply(response.data.data.commitId)
+
+      if (response.data.data.commitNumber > 0) {
+        getSubCommits(response.data.data._id, 1);
+      } else {
+        setSubCommits([])
+      }
+    } catch (err) {
+      if (err.response) navigate('/home');
     }
   }
 
