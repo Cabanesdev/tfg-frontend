@@ -45,15 +45,19 @@ function ViewPost() {
   }, [page])
 
   const getPost = async () => {
-    const response = await api.getPostById(id)
-    if (!response.data.data) return navigate('/')
+    try {
+      const response = await api.getPostById(id)
+      if (!response.data.data) return navigate('/')
 
-    setPostData(response.data.data)
-    getUserData(response.data.data.userId)
+      setPostData(response.data.data)
+      getUserData(response.data.data.userId)
 
-    if (response.data.data.comments > 0)
-      getComments(response.data.data._id)
-    setPage(1);
+      if (response.data.data.comments > 0)
+        getComments(response.data.data._id)
+      setPage(1);
+    }catch(err) {
+      if(err.response) navigate('/home');
+    }
   }
 
   const getUserData = async (userId) => {
