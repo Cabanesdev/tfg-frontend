@@ -70,8 +70,6 @@ function User() {
     } else {
       response = await api.getPosts(params);
     }
-    console.log(userId)
-    console.log(response.data.data)
     setPostData(response.data.data);
     setPage(1);
   }
