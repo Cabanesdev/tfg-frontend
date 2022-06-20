@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import Auth from './pages/auth';
 import Home from './pages/home';
 import User from './pages/user';
@@ -21,6 +21,10 @@ function App() {
       <Route path="/post/edit/:id" element={<EditPost />} />
       <Route path="/post/:id" element={<ViewPost />} />
       <Route path="/commit/:id" element={<ViewCommit />} />
+      <Route
+        path="*"
+        element={<Navigate to="/" replace />}
+      />
     </Routes>
   );
 }
